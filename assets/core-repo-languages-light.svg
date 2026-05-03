@@ -14,7 +14,7 @@
 
   <rect x="28" y="70" width="334" height="10" rx="5" ry="5" fill="#eaeef2" />
   <g clip-path="url(#barclip-light)">
-    <rect x="28.000" y="70" width="199.064" height="10" fill="#3572A5" /><rect x="227.064" y="70" width="66.800" height="10" fill="#76B900" /><rect x="293.864" y="70" width="28.724" height="10" fill="#f34b7d" /><rect x="322.588" y="70" width="26.720" height="10" fill="#f1e05a" /><rect x="349.308" y="70" width="11.356" height="10" fill="#89e051" /><rect x="360.664" y="70" width="1.336" height="10" fill="#8b949e" />
+    <rect x="28.000" y="70" width="199.023" height="10" fill="#3572A5" /><rect x="227.023" y="70" width="66.892" height="10" fill="#76B900" /><rect x="293.915" y="70" width="28.873" height="10" fill="#f34b7d" /><rect x="322.788" y="70" width="26.574" height="10" fill="#f1e05a" /><rect x="349.362" y="70" width="11.289" height="10" fill="#89e051" /><rect x="360.651" y="70" width="1.349" height="10" fill="#8b949e" />
   </g>
 
   
