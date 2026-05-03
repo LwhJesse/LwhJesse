@@ -6,7 +6,7 @@
 
 ### Engineering Mechanics · Numerical Computing · Open Source Systems
 
-C++ / CUDA / Python · CFD / FEM / GPU Linear Algebra · Arch Linux / Hyprland / Neovim
+**CFD · FEM · GPU Linear Algebra · Linux Graphics · Arch Linux**
 
 </div>
 
@@ -14,28 +14,44 @@ C++ / CUDA / Python · CFD / FEM / GPU Linear Algebra · Arch Linux / Hyprland /
 
 ## About
 
-Engineering Mechanics undergraduate focused on numerical computing, GPU acceleration, and open-source systems.
+I am an Engineering Mechanics undergraduate focused on numerical computing, GPU acceleration, and open-source systems.
 
-I work around CFD solvers, nonlinear mechanics, finite element simulation, GPU linear algebra, and Linux desktop infrastructure.
+My current work sits around nonlinear mechanics, finite element simulation, CFD solvers, GPU-side linear algebra, and Linux desktop infrastructure. I like projects where mathematics, engineering judgment, and low-level systems work meet each other.
+
+## Current Focus
+
+- **Scientific computing** — numerical methods, nonlinear mechanics, FEM validation, and solver behavior.
+- **GPU acceleration** — CUDA-side data movement, sparse linear algebra, and solver performance.
+- **CFD / solver infrastructure** — SU2, OpenFOAM, and the linear algebra path beneath large-scale simulation codes.
+- **Linux desktop systems** — Arch Linux, Hyprland, rendering behavior, ICC/color pipeline issues, and compositor debugging.
+- **Open-source maintenance** — AUR packaging and upstream contribution workflows.
 
 ## Selected Work
 
-- **SU2 GPU linear algebra** — reducing redundant CUDA-side matrix transfers and improving solver data movement.
-- **Hyprland rendering** — ICC / blur transparency investigation on a high-refresh 10-bit display pipeline.
-- **Nonlinear beam deflection** — numerical computation and FEM validation for large-deflection beam theory limits.
-- **OpenSeesPy on AUR** — maintaining structural analysis tooling for Arch Linux users.
-- **reinplayer-bin on AUR** — Arch packaging and maintenance.
+- **SU2 GPU linear algebra optimization**  
+  Reducing redundant CUDA-side matrix transfers and improving solver data movement across repeated matrix-vector operations.
 
-## Technical Focus
+- **Hyprland ICC / blur rendering investigation**  
+  Debugging ICC-enabled blur transparency behavior on a high-refresh 10-bit display pipeline.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/C%2B%2B-0d1117?style=flat-square&logo=cplusplus&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
-  <img src="https://img.shields.io/badge/CUDA-0d1117?style=flat-square&logo=nvidia&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
-  <img src="https://img.shields.io/badge/Python-0d1117?style=flat-square&logo=python&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
-  <img src="https://img.shields.io/badge/Shell-0d1117?style=flat-square&logo=gnubash&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
-  <img src="https://img.shields.io/badge/Lua-0d1117?style=flat-square&logo=lua&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
-  <img src="https://img.shields.io/badge/Arch%20Linux-0d1117?style=flat-square&logo=archlinux&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
-</p>
+- **Nonlinear beam deflection computation**  
+  Numerical calculation and FEM validation for the failure boundary of linear beam theory under large deflection.
+
+- **OpenSeesPy on AUR**  
+  Maintaining structural analysis tooling for Arch Linux users.
+
+- **reinplayer-bin on AUR**  
+  Packaging and maintaining desktop/media tooling for Arch Linux.
+
+## Technical Stack
+
+<div align="center">
+
+`C++` · `CUDA` · `Python` · `Shell` · `Lua` · `Git` · `Linux` · `Arch Linux` · `Neovim`
+
+`SU2` · `OpenFOAM` · `OpenSees` · `Hyprland` · `FEM` · `CFD` · `Numerical Linear Algebra`
+
+</div>
 
 ## GitHub Activity
 
@@ -49,7 +65,7 @@ I work around CFD solvers, nonlinear mechanics, finite element simulation, GPU l
 </p>
 
 <p align="center">
-  <img src="./profile-summary-card-output/github_dark/3-stats.svg" alt="GitHub stats" width="49%" />
+  <img src="./profile-summary-card-output/github_dark/3-stats.svg" alt="GitHub statistics" width="49%" />
   <img src="./profile-summary-card-output/github_dark/4-productive-time.svg" alt="Productive time" width="49%" />
 </p>
 
@@ -57,6 +73,11 @@ I work around CFD solvers, nonlinear mechanics, finite element simulation, GPU l
 
 <div align="center">
 
-**Mechanics, solvers, GPU, and open source systems.**
+Mechanics, solvers, GPU, and open-source systems.
+
+<br />
+<br />
+
+<img src="./assets/signature.svg" alt="Jesse signature" width="220" />
 
 </div>
