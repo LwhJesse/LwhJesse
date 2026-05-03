@@ -8,6 +8,8 @@ import urllib.request
 from pathlib import Path
 from xml.sax.saxutils import escape
 
+from profile_card_font import FONT_STACK_CSS, font_style_block
+
 OWNER = os.environ.get("GITHUB_REPOSITORY_OWNER", "LwhJesse")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
@@ -19,7 +21,6 @@ CARD_W = 340
 CARD_H = 200
 CARD_RX = 12
 CARD_RY = 12
-FONT_STACK = '\'Segoe UI\', Ubuntu, "Helvetica Neue", Sans-Serif'
 
 OUT_LIGHT = Path("assets/core-repo-languages-light.svg")
 OUT_DARK = Path("assets/core-repo-languages-dark.svg")
@@ -210,9 +211,7 @@ def render_svg(theme_name: str, langs, total_bytes: int, repo_count: int) -> str
     svg = f'''<?xml version="1.0" encoding="UTF-8"?>
 <svg width="{CARD_W}" height="{CARD_H}" viewBox="0 0 {CARD_W} {CARD_H}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
-    text {{
-      font-family: {FONT_STACK};
-    }}
+    {font_style_block("text")}
   </style>
   <rect x="0.5" y="0.5" width="{CARD_W-1}" height="{CARD_H-1}" rx="{CARD_RX}" ry="{CARD_RY}"
         fill="{th["bg"]}" stroke="{th["border"]}"/>

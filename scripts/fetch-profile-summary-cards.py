@@ -4,6 +4,8 @@ import re
 import urllib.request
 from pathlib import Path
 
+from profile_card_font import EMBEDDED_FONT_FAMILY, font_style_block
+
 USER = os.environ.get("GITHUB_REPOSITORY_OWNER", "LwhJesse")
 
 CARDS = [
@@ -14,7 +16,6 @@ CARDS = [
 THEMES = ["github", "github_dark"]
 
 BASE = "https://github-profile-summary-cards.vercel.app/api/cards"
-FONT_STACK = '\'Segoe UI\', Ubuntu, "Helvetica Neue", Sans-Serif'
 TITLE_COLORS = {
     "github": "#0969da",
     "github_dark": "#2f81f7",
@@ -34,9 +35,11 @@ def normalize_svg(svg: str, theme: str) -> str:
     title_color = TITLE_COLORS[theme]
 
     svg = re.sub(
-        r"font-family:\s*'Segoe UI', Ubuntu, \"Helvetica Neue\", Sans-Serif",
-        f"font-family: {FONT_STACK}",
+        r"<style>.*?</style>",
+        f"<style>{font_style_block('*')}</style>",
         svg,
+        count=1,
+        flags=re.S,
     )
 
     svg = re.sub(
@@ -45,6 +48,8 @@ def normalize_svg(svg: str, theme: str) -> str:
         svg,
         count=1,
     )
+
+    svg = svg.replace('font-family="sans-serif"', f'font-family="{EMBEDDED_FONT_FAMILY}"')
 
     return svg
 
