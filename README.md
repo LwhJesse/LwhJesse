@@ -68,11 +68,9 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
 </p>
 
 <p align="center">
-  <img src="./assets/core-repo-languages-light.svg#gh-light-mode-only" alt="Core repository languages" width="98%" />
-  <img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="98%" />
+  <img src="./assets/core-repo-languages-light.svg#gh-light-mode-only" alt="Core repository languages" width="82%" />
+  <img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="82%" />
 </p>
-
----
 
 <p align="right">
   <img src="./assets/signature-dark.svg#gh-light-mode-only" alt="Jesse signature" width="185" />
