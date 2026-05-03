@@ -7,29 +7,46 @@ from pathlib import Path
 USER = os.environ.get("GITHUB_REPOSITORY_OWNER", "LwhJesse")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
-EXCLUDE_REPOS = {
-    USER,  # profile README repo
-}
+EXCLUDE_REPOS = {USER}
+MAX_LANGS = 5
 
 DISPLAY_NAME = {
     "Cuda": "CUDA",
-    "C++": "C++",
-    "Python": "Python",
-    "JavaScript": "JavaScript",
-    "Shell": "Shell",
-    "CMake": "CMake",
-    "Other": "Other",
 }
 
 COLORS = {
+    "Python": "#3572A5",
     "Cuda": "#76B900",
     "C++": "#f34b7d",
-    "Python": "#3572A5",
     "JavaScript": "#f1e05a",
     "Shell": "#89e051",
     "CMake": "#DA3434",
+    "C": "#555555",
+    "Lua": "#000080",
+    "Dart": "#00B4AB",
+    "TypeScript": "#3178c6",
     "Other": "#8b949e",
 }
+
+THEMES = {
+    "light": {
+        "bg": "#ffffff",
+        "border": "#d0d7de",
+        "track": "#f6f8fa",
+        "title": "#0969da",
+        "text": "#24292f",
+        "muted": "#57606a",
+    },
+    "dark": {
+        "bg": "#0d1117",
+        "border": "#30363d",
+        "track": "#161b22",
+        "title": "#58a6ff",
+        "text": "#c9d1d9",
+        "muted": "#8b949e",
+    },
+}
+
 
 def get_json(url: str):
     headers = {
@@ -38,13 +55,16 @@ def get_json(url: str):
     }
     if TOKEN:
         headers["Authorization"] = f"Bearer {TOKEN}"
+
     req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req) as r:
+    with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)
+
 
 def fetch_owned_nonfork_repos():
     repos = []
     page = 1
+
     while True:
         url = f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}&sort=updated"
         data = get_json(url)
@@ -53,7 +73,7 @@ def fetch_owned_nonfork_repos():
         repos.extend(data)
         page += 1
 
-    out = []
+    result = []
     for repo in repos:
         if repo.get("fork"):
             continue
@@ -61,164 +81,141 @@ def fetch_owned_nonfork_repos():
             continue
         if repo["name"] in EXCLUDE_REPOS:
             continue
-        out.append(repo)
-    return out
+        result.append(repo)
+
+    return result
+
 
 def collect_languages(repos):
     total = {}
-    counted_repos = []
-
     for repo in repos:
         langs = get_json(repo["languages_url"])
-        if not langs:
-            continue
-
-        counted_repos.append(repo["name"])
         for lang, n in langs.items():
             total[lang] = total.get(lang, 0) + int(n)
+    return total
 
-    return total, counted_repos
 
-def escape(s: str) -> str:
-    return (
-        s.replace("&", "&amp;")
-         .replace("<", "&lt;")
-         .replace(">", "&gt;")
-         .replace('"', "&quot;")
-    )
+def display_languages(total):
+    if not total:
+        return [("Other", 1)], 1
 
-def prepare_display_languages(total):
-    total_bytes = sum(total.values()) or 1
-
-    # 先按字节数降序
+    total_bytes = sum(total.values())
     items = sorted(total.items(), key=lambda x: x[1], reverse=True)
 
-    # 小于 3% 的语言并入 Other
-    major = []
-    other_sum = 0
+    keep = []
+    used = set()
+
+    if "Cuda" in total:
+        keep.append(("Cuda", total["Cuda"]))
+        used.add("Cuda")
+
     for lang, n in items:
-        pct = n / total_bytes
-        if pct < 0.03:
-            other_sum += n
-        else:
-            major.append((lang, n))
+        if lang in used:
+            continue
+        if len(keep) >= MAX_LANGS:
+            break
+        keep.append((lang, n))
+        used.add(lang)
 
-    if other_sum > 0:
-        major.append(("Other", other_sum))
+    other = sum(n for lang, n in items if lang not in used)
+    if other > 0:
+        keep.append(("Other", other))
 
-    # 最多显示 5 项；如果超过 5 项，把后面的再并入 Other
-    if len(major) > 5:
-        kept = major[:4]
-        merged_other = sum(n for _, n in major[4:])
-        has_other = any(lang == "Other" for lang, _ in kept)
-        if has_other:
-            new_kept = []
-            for lang, n in kept:
-                if lang == "Other":
-                    new_kept.append((lang, n + merged_other))
-                else:
-                    new_kept.append((lang, n))
-            major = new_kept
-        else:
-            major = kept + [("Other", merged_other)]
+    keep = sorted(keep, key=lambda x: x[1], reverse=True)
+    return keep, total_bytes
 
-    return major, total_bytes
 
-def make_svg(total, repos, theme):
-    dark = theme == "dark"
+def esc(s: str) -> str:
+    return (
+        str(s)
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
 
-    bg = "#0d1117" if dark else "#ffffff"
-    border = "#30363d" if dark else "#d0d7de"
-    title = "#58a6ff" if dark else "#0969da"
-    text = "#c9d1d9" if dark else "#24292f"
-    muted = "#8b949e" if dark else "#57606a"
-    track = "#161b22" if dark else "#f6f8fa"
 
-    langs, total_bytes = prepare_display_languages(total)
+def make_svg(total, repo_count, theme_name):
+    t = THEMES[theme_name]
+    langs, total_bytes = display_languages(total)
 
-    width = 700
-    height = 270
-    pad_x = 30
+    width = 510
+    height = 250
 
-    bar_x = pad_x
-    bar_y = 84
-    bar_w = width - 2 * pad_x
-    bar_h = 16
-    radius = 8
+    bar_x = 30
+    bar_y = 86
+    bar_w = 450
+    bar_h = 12
 
-    parts = []
-    parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">')
-    parts.append("  <defs>")
-    parts.append(f'    <clipPath id="bar-clip-{theme}">')
-    parts.append(f'      <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="{radius}" ry="{radius}" />')
-    parts.append("    </clipPath>")
-    parts.append("  </defs>")
+    clip_id = f"core-lang-bar-{theme_name}"
 
-    parts.append(f'  <rect x="0.5" y="0.5" width="{width-1}" height="{height-1}" rx="12" fill="{bg}" stroke="{border}" />')
-    parts.append(f'  <text x="{pad_x}" y="38" font-family="Georgia, Times New Roman, serif" font-size="25" fill="{title}">Core Repository Languages</text>')
-    parts.append(f'  <text x="{pad_x}" y="60" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="{muted}">Owned public non-fork repositories · GitHub language bytes</text>')
+    out = []
+    out.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">')
+    out.append("  <defs>")
+    out.append(f'    <clipPath id="{clip_id}">')
+    out.append(f'      <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="6" ry="6"/>')
+    out.append("    </clipPath>")
+    out.append("  </defs>")
 
-    # 先画轨道
-    parts.append(f'  <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="{radius}" ry="{radius}" fill="{track}" stroke="{border}" />')
+    out.append(f'  <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="{t["bg"]}" stroke="{t["border"]}"/>')
 
-    # 再用 clipPath 裁剪 stacked bar，保证两端天然圆角完整
-    parts.append(f'  <g clip-path="url(#bar-clip-{theme})">')
+    out.append(f'  <text x="30" y="34" font-family="Georgia, Times New Roman, serif" font-size="21" fill="{t["title"]}">Core Repository Languages</text>')
+    out.append(f'  <text x="30" y="52" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" fill="{t["muted"]}">owned public non-fork repositories · GitHub language bytes</text>')
+
+    out.append(f'  <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="6" fill="{t["track"]}" stroke="{t["border"]}"/>')
+    out.append(f'  <g clip-path="url(#{clip_id})">')
+
     cursor = bar_x
     for lang, n in langs:
-        frac = n / total_bytes
-        seg_w = bar_w * frac
+        seg_w = bar_w * (n / total_bytes)
         color = COLORS.get(lang, "#8b949e")
-        parts.append(f'    <rect x="{cursor:.2f}" y="{bar_y}" width="{seg_w:.2f}" height="{bar_h}" fill="{color}" />')
+        out.append(f'    <rect x="{cursor:.2f}" y="{bar_y}" width="{seg_w:.2f}" height="{bar_h}" fill="{color}"/>')
         cursor += seg_w
-    parts.append("  </g>")
 
-    # 图例：最多 5 项，2 行排布
-    legend = []
-    for lang, n in langs:
-        pct = 100 * n / total_bytes
-        legend.append((DISPLAY_NAME.get(lang, lang), pct, COLORS.get(lang, "#8b949e")))
+    out.append("  </g>")
 
-    col_x = [pad_x, pad_x + 235, pad_x + 470]
-    row_y0 = 140
+    # 两列三行，和左边 donut 卡的视觉高度更接近
+    col_x = [34, 255]
+    row_y = [132, 165, 198]
 
-    for i, (name, pct, color) in enumerate(legend):
-        col = i % 3
-        row = i // 3
+    for i, (lang, n) in enumerate(langs[:6]):
+        col = i % 2
+        row = i // 2
         lx = col_x[col]
-        ly = row_y0 + row * 42
+        ly = row_y[row]
 
-        parts.append(f'  <circle cx="{lx+7}" cy="{ly-5}" r="6" fill="{color}" />')
-        parts.append(f'  <text x="{lx+24}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" font-weight="600" fill="{text}">{escape(name)}</text>')
-        parts.append(f'  <text x="{lx+145}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" fill="{muted}">{pct:.1f}%</text>')
+        pct = 100 * n / total_bytes
+        name = DISPLAY_NAME.get(lang, lang)
+        color = COLORS.get(lang, "#8b949e")
 
-    parts.append(f'  <text x="{pad_x}" y="{height-20}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11" fill="{muted}">Repos counted: {len(repos)} · Forks and the profile repository are excluded.</text>')
-    parts.append("</svg>")
-    return "\n".join(parts)
+        out.append(f'  <circle cx="{lx + 6}" cy="{ly - 5}" r="5.5" fill="{color}"/>')
+        out.append(f'  <text x="{lx + 20}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="{t["text"]}">{esc(name)}</text>')
+        out.append(f'  <text x="{lx + 118}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="{t["muted"]}">{pct:.1f}%</text>')
+
+    out.append(f'  <text x="30" y="234" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="9.5" fill="{t["muted"]}">Repos counted: {repo_count} · Forks, archived repositories, and the profile repository are excluded.</text>')
+
+    out.append("</svg>")
+    return "\n".join(out)
+
 
 def main():
     repos = fetch_owned_nonfork_repos()
-    total, counted_repos = collect_languages(repos)
+    total = collect_languages(repos)
 
     Path("assets").mkdir(exist_ok=True)
 
     Path("assets/core-repo-languages-light.svg").write_text(
-        make_svg(total, counted_repos, "light")
+        make_svg(total, len(repos), "light")
     )
     Path("assets/core-repo-languages-dark.svg").write_text(
-        make_svg(total, counted_repos, "dark")
+        make_svg(total, len(repos), "dark")
     )
 
-    langs, total_bytes = prepare_display_languages(total)
-
-    print("Displayed language totals:")
+    langs, total_bytes = display_languages(total)
+    print("Generated core repository language cards:")
     for lang, n in langs:
-        pct = 100 * n / total_bytes
-        print(f"{DISPLAY_NAME.get(lang, lang):16s} {n:8d}  {pct:5.1f}%")
+        print(f"{DISPLAY_NAME.get(lang, lang):16s} {100 * n / total_bytes:5.1f}%")
 
-    print()
-    print("Repos counted:")
-    for repo in counted_repos:
-        print(f"- {repo}")
 
 if __name__ == "__main__":
     main()
