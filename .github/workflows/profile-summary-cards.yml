@@ -4,15 +4,23 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "17 18 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - ".github/workflows/profile-summary-cards.yml"
+      - "assets/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: generate-profile-summary-cards
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
