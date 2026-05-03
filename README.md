@@ -56,17 +56,20 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
 ## GitHub Activity
 
 <p align="center">
-  <img src="./profile-summary-card-output/github_dark/0-profile-details.svg" alt="GitHub profile details" width="98%" />
+  <img src="./profile-summary-card-output/github/0-profile-details.svg#gh-light-mode-only" alt="GitHub profile details" width="98%" />
+  <img src="./profile-summary-card-output/github_dark/0-profile-details.svg#gh-dark-mode-only" alt="GitHub profile details" width="98%" />
 </p>
 
 <p align="center">
-  <img src="./profile-summary-card-output/github_dark/1-repos-per-language.svg" alt="Repositories per language" width="49%" />
-  <img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg" alt="Most committed languages" width="49%" />
+  <img src="./profile-summary-card-output/github/2-most-commit-language.svg#gh-light-mode-only" alt="Most committed languages" width="49%" />
+  <img src="./profile-summary-card-output/github/3-stats.svg#gh-light-mode-only" alt="GitHub statistics" width="49%" />
+  <img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg#gh-dark-mode-only" alt="Most committed languages" width="49%" />
+  <img src="./profile-summary-card-output/github_dark/3-stats.svg#gh-dark-mode-only" alt="GitHub statistics" width="49%" />
 </p>
 
 <p align="center">
-  <img src="./profile-summary-card-output/github_dark/3-stats.svg" alt="GitHub statistics" width="49%" />
-  <img src="./profile-summary-card-output/github_dark/4-productive-time.svg" alt="Productive time" width="49%" />
+  <img src="./profile-summary-card-output/github/4-productive-time.svg#gh-light-mode-only" alt="Productive time" width="49%" />
+  <img src="./profile-summary-card-output/github_dark/4-productive-time.svg#gh-dark-mode-only" alt="Productive time" width="49%" />
 </p>
 
 ---
