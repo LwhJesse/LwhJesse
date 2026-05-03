@@ -29,19 +29,28 @@ I work around CFD solvers, nonlinear mechanics, finite element simulation, GPU l
 ## Technical Focus
 
 <p align="center">
-  <img src="https://img.shields.io/badge/C%2B%2B-0d1117?style=for-the-badge&logo=cplusplus&logoColor=8fb8ff" />
-  <img src="https://img.shields.io/badge/CUDA-0d1117?style=for-the-badge&logo=nvidia&logoColor=8fb8ff" />
-  <img src="https://img.shields.io/badge/Python-0d1117?style=for-the-badge&logo=python&logoColor=8fb8ff" />
-  <img src="https://img.shields.io/badge/Shell-0d1117?style=for-the-badge&logo=gnubash&logoColor=8fb8ff" />
-  <img src="https://img.shields.io/badge/Lua-0d1117?style=for-the-badge&logo=lua&logoColor=8fb8ff" />
-  <img src="https://img.shields.io/badge/Arch%20Linux-0d1117?style=for-the-badge&logo=archlinux&logoColor=8fb8ff" />
+  <img src="https://img.shields.io/badge/C%2B%2B-0d1117?style=flat-square&logo=cplusplus&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
+  <img src="https://img.shields.io/badge/CUDA-0d1117?style=flat-square&logo=nvidia&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
+  <img src="https://img.shields.io/badge/Python-0d1117?style=flat-square&logo=python&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
+  <img src="https://img.shields.io/badge/Shell-0d1117?style=flat-square&logo=gnubash&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
+  <img src="https://img.shields.io/badge/Lua-0d1117?style=flat-square&logo=lua&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
+  <img src="https://img.shields.io/badge/Arch%20Linux-0d1117?style=flat-square&logo=archlinux&logoColor=8fb8ff&labelColor=0d1117&color=0d1117" />
 </p>
 
-## GitHub
+## GitHub Activity
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=LwhJesse&show_icons=true&hide_border=true&bg_color=00000000&title_color=8fb8ff&text_color=c9d1d9&icon_color=8fb8ff" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LwhJesse&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=8fb8ff&text_color=c9d1d9&size_weight=0.5&count_weight=0.5" />
+  <img src="./profile-summary-card-output/github_dark/0-profile-details.svg" alt="GitHub profile details" width="98%" />
+</p>
+
+<p align="center">
+  <img src="./profile-summary-card-output/github_dark/1-repos-per-language.svg" alt="Repositories per language" width="49%" />
+  <img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg" alt="Most committed languages" width="49%" />
+</p>
+
+<p align="center">
+  <img src="./profile-summary-card-output/github_dark/3-stats.svg" alt="GitHub stats" width="49%" />
+  <img src="./profile-summary-card-output/github_dark/4-productive-time.svg" alt="Productive time" width="49%" />
 </p>
 
 ---
