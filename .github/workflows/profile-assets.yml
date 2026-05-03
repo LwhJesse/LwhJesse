@@ -7,12 +7,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "README.md"
-      - "scripts/**"
-      - ".github/workflows/profile-assets.yml"
-      - "assets/**"
-      - "profile-summary-card-output/**"
+
+concurrency:
+  group: profile-assets
+  cancel-in-progress: true
 
 jobs:
   build:

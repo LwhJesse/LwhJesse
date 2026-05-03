@@ -55,24 +55,26 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
 
 ## GitHub Activity
 
-<div align="center">
-
-<img src="./profile-summary-card-output/github/0-profile-details.svg#gh-light-mode-only" alt="GitHub profile details" width="68%" />
-<img src="./profile-summary-card-output/github_dark/0-profile-details.svg#gh-dark-mode-only" alt="GitHub profile details" width="68%" />
-
-<br><br>
-
-<img src="./profile-summary-card-output/github/2-most-commit-language.svg#gh-light-mode-only" alt="Top languages by commit" width="48%" />
-<img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg#gh-dark-mode-only" alt="Top languages by commit" width="48%" />
-
-<br><br>
-
-<img src="./assets/core-repo-languages-light.svg#gh-light-mode-only" alt="Core repository languages" width="58%" />
-<img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="58%" />
-
-</div>
+<table align="center">
+  <tr>
+    <td colspan="2" align="center">
+      <img src="./profile-summary-card-output/github/0-profile-details.svg#gh-light-mode-only" alt="GitHub profile details" width="84%" />
+      <img src="./profile-summary-card-output/github_dark/0-profile-details.svg#gh-dark-mode-only" alt="GitHub profile details" width="84%" />
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <img src="./profile-summary-card-output/github/2-most-commit-language.svg#gh-light-mode-only" alt="Top languages by commit" width="96%" />
+      <img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg#gh-dark-mode-only" alt="Top languages by commit" width="96%" />
+    </td>
+    <td width="50%" align="center" valign="top">
+      <img src="./assets/core-repo-languages-light.svg#gh-light-mode-only" alt="Core repository languages" width="96%" />
+      <img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="96%" />
+    </td>
+  </tr>
+</table>
 
 <p align="right">
-  <img src="./assets/signature-dark.svg#gh-light-mode-only" alt="Jesse signature" width="170" />
-  <img src="./assets/signature-light.svg#gh-dark-mode-only" alt="Jesse signature" width="170" />
+  <img src="./assets/signature-dark.svg#gh-light-mode-only" alt="Jesse signature" width="152" />
+  <img src="./assets/signature-light.svg#gh-dark-mode-only" alt="Jesse signature" width="152" />
 </p>
