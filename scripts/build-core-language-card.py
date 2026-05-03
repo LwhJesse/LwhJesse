@@ -14,6 +14,9 @@ EXCLUDE_REPOS = {USER}
 # 最多显示 5 个具名语言；其余全部合并到 Other
 MAX_NAMED_LANGS = 5
 
+# 非 pinned 语言低于这个占比就并入 Other，避免 1%~2% 的长尾语言把图例弄碎。
+MIN_NAMED_SHARE = 0.03
+
 # 这些语言只要存在，就强制保留
 PINNED_LANGS = {"Cuda"}
 
@@ -147,12 +150,15 @@ def select_display_languages(total):
             selected.append((lang, total[lang]))
             selected_names.add(lang)
 
-    # 再从大到小补齐到 MAX_NAMED_LANGS
+    # 再从大到小补齐到 MAX_NAMED_LANGS。
+    # 但非 pinned 语言低于 MIN_NAMED_SHARE 时并入 Other，避免长尾语言破坏版面。
     for lang, n in ranked:
         if lang in selected_names:
             continue
         if len(selected) >= MAX_NAMED_LANGS:
             break
+        if n / total_bytes < MIN_NAMED_SHARE:
+            continue
         selected.append((lang, n))
         selected_names.add(lang)
 

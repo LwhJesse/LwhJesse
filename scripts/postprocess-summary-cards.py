@@ -100,11 +100,11 @@ def main():
 
     # 第一张：略大一点，重点是纵向稍高一点
     for p in first_cards:
-        adjust_svg(p, sx=1.000, sy=1.060)
+        adjust_svg(p, sx=1.000, sy=1.140)
 
     # 第二张：整体缩小一点
     for p in second_cards:
-        adjust_svg(p, sx=0.860, sy=0.860)
+        adjust_svg(p, sx=0.720, sy=0.720)
 
 
 if __name__ == "__main__":
