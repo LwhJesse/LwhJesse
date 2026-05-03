@@ -67,6 +67,8 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
   <img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="40.5%" />
 </div>
 
+<br>
+
 <p align="right">
   <img src="./assets/signature-dark.svg#gh-light-mode-only" alt="Jesse signature" width="152" />
   <img src="./assets/signature-light.svg#gh-dark-mode-only" alt="Jesse signature" width="152" />
