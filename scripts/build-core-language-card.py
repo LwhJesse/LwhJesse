@@ -15,10 +15,11 @@ MAX_NAMED_LANGS = 5   # 前5种单独显示
 MAX_DISPLAY_ITEMS = 6 # 最终最多6项：前5 + Other
 PINNED_LANGS = {"CUDA"}
 
-CARD_W = 390
+CARD_W = 340
 CARD_H = 200
 CARD_RX = 12
 CARD_RY = 12
+FONT_STACK = "'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif"
 
 OUT_LIGHT = Path("assets/core-repo-languages-light.svg")
 OUT_DARK = Path("assets/core-repo-languages-dark.svg")
@@ -159,15 +160,15 @@ def fmt_pct(value: int, total_bytes: int) -> str:
 def render_svg(theme_name: str, langs, total_bytes: int, repo_count: int) -> str:
     th = THEMES[theme_name]
 
-    bar_x = 28
+    bar_x = 24
     bar_y = 70
-    bar_w = 334
+    bar_w = 292
     bar_h = 10
     bar_rx = 5
 
-    legend_x0 = 38
+    legend_x0 = 28
     legend_y0 = 108
-    legend_col_w = 108
+    legend_col_w = 96
     legend_row_h = 30
 
     clip_id = f"barclip-{theme_name}"
@@ -196,23 +197,28 @@ def render_svg(theme_name: str, langs, total_bytes: int, repo_count: int) -> str
             f'''
             <g transform="translate({x},{y})">
               <circle cx="0" cy="0" r="5.5" fill="{color_for_lang(lang)}" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="{th["strong"]}">{escape(lang)}</text>
-              <text x="72" y="3.5" font-size="10.5" fill="{th["text"]}">{pct_text}</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="{th["strong"]}">{escape(lang)}</text>
+              <text x="66" y="3.5" font-size="10" fill="{th["text"]}">{pct_text}</text>
             </g>
             '''
         )
 
     repos_line = (
-        f"Repos counted: {repo_count} · Forks, archived repositories, and the profile repository are excluded."
+        f"Repos counted: {repo_count} · Forks, archived, and profile repo excluded."
     )
 
     svg = f'''<?xml version="1.0" encoding="UTF-8"?>
 <svg width="{CARD_W}" height="{CARD_H}" viewBox="0 0 {CARD_W} {CARD_H}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text {{
+      font-family: {FONT_STACK};
+    }}
+  </style>
   <rect x="0.5" y="0.5" width="{CARD_W-1}" height="{CARD_H-1}" rx="{CARD_RX}" ry="{CARD_RY}"
         fill="{th["bg"]}" stroke="{th["border"]}"/>
 
-  <text x="22" y="33" font-size="20" font-weight="600" fill="{th["title"]}">Core Repository Languages</text>
-  <text x="22" y="51" font-size="10.5" fill="{th["muted"]}">Owned public non-fork repositories · GitHub language bytes</text>
+  <text x="20" y="33" font-size="22" font-weight="600" fill="{th["title"]}">Core Repository Languages</text>
+  <text x="20" y="50" font-size="9.5" fill="{th["muted"]}">Owned public non-fork repos · GitHub language bytes</text>
 
   <defs>
     <clipPath id="{clip_id}">
@@ -227,7 +233,7 @@ def render_svg(theme_name: str, langs, total_bytes: int, repo_count: int) -> str
 
   {''.join(legend_items)}
 
-  <text x="22" y="181" font-size="9.5" fill="{th["muted"]}">{escape(repos_line)}</text>
+  <text x="20" y="181" font-size="8.5" fill="{th["muted"]}">{escape(repos_line)}</text>
 </svg>
 '''
     return svg

@@ -1,59 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="390" height="200" viewBox="0 0 390 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0.5" y="0.5" width="389" height="199" rx="12" ry="12"
+<svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text {
+      font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif;
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="339" height="199" rx="12" ry="12"
         fill="#ffffff" stroke="#d0d7de"/>
 
-  <text x="22" y="33" font-size="20" font-weight="600" fill="#0969da">Core Repository Languages</text>
-  <text x="22" y="51" font-size="10.5" fill="#6e7781">Owned public non-fork repositories · GitHub language bytes</text>
+  <text x="20" y="33" font-size="22" font-weight="600" fill="#0969da">Core Repository Languages</text>
+  <text x="20" y="50" font-size="9.5" fill="#6e7781">Owned public non-fork repos · GitHub language bytes</text>
 
   <defs>
     <clipPath id="barclip-light">
-      <rect x="28" y="70" width="334" height="10" rx="5" ry="5" />
+      <rect x="24" y="70" width="292" height="10" rx="5" ry="5" />
     </clipPath>
   </defs>
 
-  <rect x="28" y="70" width="334" height="10" rx="5" ry="5" fill="#eaeef2" />
+  <rect x="24" y="70" width="292" height="10" rx="5" ry="5" fill="#eaeef2" />
   <g clip-path="url(#barclip-light)">
-    <rect x="28.000" y="70" width="199.023" height="10" fill="#3572A5" /><rect x="227.023" y="70" width="66.892" height="10" fill="#76B900" /><rect x="293.915" y="70" width="28.873" height="10" fill="#f34b7d" /><rect x="322.788" y="70" width="26.574" height="10" fill="#f1e05a" /><rect x="349.362" y="70" width="11.289" height="10" fill="#89e051" /><rect x="360.651" y="70" width="1.349" height="10" fill="#8b949e" />
+    <rect x="24.000" y="70" width="174.032" height="10" fill="#3572A5" /><rect x="198.032" y="70" width="58.400" height="10" fill="#76B900" /><rect x="256.432" y="70" width="25.112" height="10" fill="#f34b7d" /><rect x="281.544" y="70" width="23.360" height="10" fill="#f1e05a" /><rect x="304.904" y="70" width="9.928" height="10" fill="#89e051" /><rect x="314.832" y="70" width="1.168" height="10" fill="#8b949e" />
   </g>
 
   
-            <g transform="translate(38,108)">
+            <g transform="translate(28,108)">
               <circle cx="0" cy="0" r="5.5" fill="#3572A5" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="#24292f">Python</text>
-              <text x="72" y="3.5" font-size="10.5" fill="#57606a">59.6%</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="#24292f">Python</text>
+              <text x="66" y="3.5" font-size="10" fill="#57606a">59.6%</text>
             </g>
             
-            <g transform="translate(146,108)">
+            <g transform="translate(124,108)">
               <circle cx="0" cy="0" r="5.5" fill="#76B900" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="#24292f">CUDA</text>
-              <text x="72" y="3.5" font-size="10.5" fill="#57606a">20.0%</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="#24292f">CUDA</text>
+              <text x="66" y="3.5" font-size="10" fill="#57606a">20.0%</text>
             </g>
             
-            <g transform="translate(254,108)">
+            <g transform="translate(220,108)">
               <circle cx="0" cy="0" r="5.5" fill="#f34b7d" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="#24292f">C++</text>
-              <text x="72" y="3.5" font-size="10.5" fill="#57606a">8.6%</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="#24292f">C++</text>
+              <text x="66" y="3.5" font-size="10" fill="#57606a">8.6%</text>
             </g>
             
-            <g transform="translate(38,138)">
+            <g transform="translate(28,138)">
               <circle cx="0" cy="0" r="5.5" fill="#f1e05a" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="#24292f">JavaScript</text>
-              <text x="72" y="3.5" font-size="10.5" fill="#57606a">8.0%</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="#24292f">JavaScript</text>
+              <text x="66" y="3.5" font-size="10" fill="#57606a">8.0%</text>
             </g>
             
-            <g transform="translate(146,138)">
+            <g transform="translate(124,138)">
               <circle cx="0" cy="0" r="5.5" fill="#89e051" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="#24292f">Shell</text>
-              <text x="72" y="3.5" font-size="10.5" fill="#57606a">3.4%</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="#24292f">Shell</text>
+              <text x="66" y="3.5" font-size="10" fill="#57606a">3.4%</text>
             </g>
             
-            <g transform="translate(254,138)">
+            <g transform="translate(220,138)">
               <circle cx="0" cy="0" r="5.5" fill="#8b949e" />
-              <text x="14" y="3.5" font-size="10.5" font-weight="600" fill="#24292f">Other</text>
-              <text x="72" y="3.5" font-size="10.5" fill="#57606a">0.4%</text>
+              <text x="14" y="3.5" font-size="10" font-weight="600" fill="#24292f">Other</text>
+              <text x="66" y="3.5" font-size="10" fill="#57606a">0.4%</text>
             </g>
             
 
-  <text x="22" y="181" font-size="9.5" fill="#6e7781">Repos counted: 5 · Forks, archived repositories, and the profile repository are excluded.</text>
+  <text x="20" y="181" font-size="8.5" fill="#6e7781">Repos counted: 5 · Forks, archived, and profile repo excluded.</text>
 </svg>
