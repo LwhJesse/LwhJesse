@@ -19,7 +19,7 @@ CARD_W = 340
 CARD_H = 200
 CARD_RX = 12
 CARD_RY = 12
-FONT_STACK = "'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif"
+FONT_STACK = '\'Segoe UI\', Ubuntu, "Helvetica Neue", Sans-Serif'
 
 OUT_LIGHT = Path("assets/core-repo-languages-light.svg")
 OUT_DARK = Path("assets/core-repo-languages-dark.svg")

@@ -37,12 +37,11 @@ def normalize_svg(svg: str, theme: str) -> str:
         r"font-family:\s*'Segoe UI', Ubuntu, \"Helvetica Neue\", Sans-Serif",
         f"font-family: {FONT_STACK}",
         svg,
-        count=1,
     )
 
     svg = re.sub(
-        r'(<text x="30" y="40" style=")font-size:\s*22px;\s*fill:\s*[^;"]+;(">)',
-        rf"\1font-size: 22px; font-weight: 600; fill: {title_color};\2",
+        r'(<text x="30" y="40" style=")[^"]*(">)',
+        rf'\1font-size: 22px; font-weight: 600; fill: {title_color};\2',
         svg,
         count=1,
     )

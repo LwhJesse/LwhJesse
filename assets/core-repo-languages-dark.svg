@@ -2,7 +2,7 @@
 <svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
     text {
-      font-family: 'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif;
+      font-family: 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif;
     }
   </style>
   <rect x="0.5" y="0.5" width="339" height="199" rx="12" ry="12"
