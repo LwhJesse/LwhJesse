@@ -36,6 +36,10 @@ jobs:
         run: |
           python scripts/fetch-profile-summary-cards.py
 
+      - name: Postprocess profile summary cards
+        run: |
+          python scripts/postprocess-summary-cards.py
+
       - name: Commit generated profile assets
         run: |
           git config user.name "github-actions[bot]"
