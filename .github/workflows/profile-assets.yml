@@ -12,6 +12,7 @@ on:
       - "scripts/**"
       - ".github/workflows/profile-assets.yml"
       - "assets/**"
+      - "profile-summary-card-output/**"
 
 jobs:
   build:
@@ -23,13 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate core repository language cards
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-        run: |
-          python scripts/build-core-language-card.py
-
       - name: Fetch profile summary cards
         env:
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
@@ -39,6 +33,13 @@ jobs:
       - name: Postprocess profile summary cards
         run: |
           python scripts/postprocess-summary-cards.py
+
+      - name: Generate core repository language cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          python scripts/build-core-language-card.py
 
       - name: Commit generated profile assets
         run: |
