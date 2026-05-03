@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="./assets/jesse-banner.png" alt="Jesse signature banner" width="100%" />
+  <img src="./assets/jesse-banner-light.png#gh-light-mode-only" alt="Jesse signature banner" width="100%" />
+  <img src="./assets/jesse-banner-dark.png#gh-dark-mode-only" alt="Jesse signature banner" width="100%" />
 </p>
 
 <div align="center">
