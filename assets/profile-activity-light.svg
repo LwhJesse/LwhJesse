@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="230" viewBox="0 0 960 230">
+  <defs>
+    <clipPath id="lang-bar-light">
+      <rect x="42" y="122" width="876" height="14" rx="7" ry="7"/>
+    </clipPath>
+  </defs>
+  <rect x="0.5" y="0.5" width="959" height="229" rx="18" fill="#ffffff" stroke="#d0d7de" />
+  <text x="42" y="42" font-family="Georgia, Times New Roman, serif" font-size="25" fill="#0969da">GitHub Activity</text>
+  <text x="42" y="66" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="#57606a">compact public profile signals · generated automatically</text>
+  <rect x="42" y="78" width="138" height="28" rx="14" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="57" y="97" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#24292f">11 public repos</text>
+  <rect x="192" y="78" width="114" height="28" rx="14" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="207" y="97" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#24292f">5 core repos</text>
+  <rect x="318" y="78" width="92" height="28" rx="14" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="333" y="97" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#24292f">3 stars</text>
+  <rect x="422" y="78" width="92" height="28" rx="14" fill="#f6f8fa" stroke="#d0d7de" />
+  <text x="437" y="97" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#24292f">0 forks</text>
+  <text x="42" y="115" font-family="Georgia, Times New Roman, serif" font-size="20" fill="#24292f">Core Repository Languages</text>
+  <rect x="42" y="122" width="876" height="14" rx="7" fill="#f6f8fa" stroke="#d0d7de" />
+  <g clip-path="url(#lang-bar-light)">
+    <rect x="42.00" y="122" width="526.34" height="14" fill="#3572A5" />
+    <rect x="568.34" y="122" width="177.76" height="14" fill="#76B900" />
+    <rect x="746.09" y="122" width="78.11" height="14" fill="#f34b7d" />
+    <rect x="824.21" y="122" width="71.89" height="14" fill="#f1e05a" />
+    <rect x="896.10" y="122" width="18.25" height="14" fill="#89e051" />
+    <rect x="914.35" y="122" width="3.65" height="14" fill="#8b949e" />
+  </g>
+  <circle cx="48" cy="165" r="6" fill="#3572A5" />
+  <text x="62" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#24292f">Python</text>
+  <text x="144" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#57606a">60.1%</text>
+  <circle cx="226" cy="165" r="6" fill="#76B900" />
+  <text x="240" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#24292f">CUDA</text>
+  <text x="322" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#57606a">20.3%</text>
+  <circle cx="404" cy="165" r="6" fill="#f34b7d" />
+  <text x="418" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#24292f">C++</text>
+  <text x="500" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#57606a">8.9%</text>
+  <circle cx="582" cy="165" r="6" fill="#f1e05a" />
+  <text x="596" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#24292f">JavaScript</text>
+  <text x="678" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#57606a">8.2%</text>
+  <circle cx="760" cy="165" r="6" fill="#89e051" />
+  <text x="774" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#24292f">Shell</text>
+  <text x="856" y="170" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#57606a">2.1%</text>
+  <circle cx="48" cy="195" r="6" fill="#8b949e" />
+  <text x="62" y="200" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#24292f">Other</text>
+  <text x="144" y="200" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#57606a">0.4%</text>
+  <text x="42" y="218" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" fill="#57606a">Forks, archived repositories, and the profile README repository are excluded from language calculation.</text>
+</svg>
