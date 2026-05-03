@@ -8,11 +8,14 @@ from pathlib import Path
 USER = os.environ.get("GITHUB_REPOSITORY_OWNER", "LwhJesse")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
+# 排除 profile README 仓库本身
 EXCLUDE_REPOS = {USER}
 
-# 最多显示 5 个具名语言；其余全部合并 Other。
-# CUDA 不管排第几，只要存在就强制占一个名额。
+# 最多显示 5 个具名语言；其余全部合并到 Other
 MAX_NAMED_LANGS = 5
+
+# 这些语言只要存在，就强制保留
+PINNED_LANGS = {"Cuda"}
 
 DISPLAY_NAME = {
     "Cuda": "CUDA",
@@ -113,22 +116,21 @@ def fetch_owned_nonfork_repos():
 
 def collect_languages(repos):
     total = {}
-
     for repo in repos:
         langs = get_json(repo["languages_url"])
         for lang, n in langs.items():
             total[lang] = total.get(lang, 0) + int(n)
-
     return total
 
 
 def select_display_languages(total):
     """
-    输出规则：
-    - CUDA 存在则强制保留；
-    - 其余按字节数从大到小补齐到 MAX_NAMED_LANGS；
-    - 剩余全部合并为 Other；
-    - 图例数量最多 MAX_NAMED_LANGS + 1，不会无限增长。
+    规则：
+    1. CUDA 只要存在就强制保留
+    2. 其余语言按字节数从大到小取
+    3. 最多显示 5 个具名语言
+    4. 其余全部合并为 Other
+    5. 最终图例最多 6 项（5 个具名 + Other）
     """
     if not total:
         return [("Other", 1)], 1
@@ -139,10 +141,13 @@ def select_display_languages(total):
     selected = []
     selected_names = set()
 
-    if "Cuda" in total:
-        selected.append(("Cuda", total["Cuda"]))
-        selected_names.add("Cuda")
+    # 先保留 pinned 语言（比如 CUDA）
+    for lang in PINNED_LANGS:
+        if lang in total and lang not in selected_names:
+            selected.append((lang, total[lang]))
+            selected_names.add(lang)
 
+    # 再从大到小补齐到 MAX_NAMED_LANGS
     for lang, n in ranked:
         if lang in selected_names:
             continue
@@ -155,6 +160,7 @@ def select_display_languages(total):
     if other > 0:
         selected.append(("Other", other))
 
+    # 最后按大小重新排序，让条形图和图例更自然
     selected = sorted(selected, key=lambda x: x[1], reverse=True)
     return selected, total_bytes
 
@@ -173,15 +179,14 @@ def make_svg(total, repo_count, theme_name):
     t = THEMES[theme_name]
     langs, total_bytes = select_display_languages(total)
 
-    # 固定尺寸：配合 README 里的 height="235" 使用。
-    # 语言再多也不会把 SVG 撑高。
-    width = 510
-    height = 250
+    # 固定尺寸；README 里统一 width=62% 缩放
+    width = 820
+    height = 220
 
-    bar_x = 30
-    bar_y = 84
-    bar_w = 450
-    bar_h = 12
+    bar_x = 36
+    bar_y = 74
+    bar_w = 748
+    bar_h = 14
 
     clip_id = f"core-lang-bar-{theme_name}"
 
@@ -192,24 +197,24 @@ def make_svg(total, repo_count, theme_name):
     out.append("  <defs>")
     out.append(f'    <clipPath id="{clip_id}">')
     out.append(
-        f'      <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="6" ry="6"/>'
+        f'      <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7" ry="7"/>'
     )
     out.append("    </clipPath>")
     out.append("  </defs>")
 
     out.append(
-        f'  <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="{t["bg"]}" stroke="{t["border"]}"/>'
+        f'  <rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="14" fill="{t["bg"]}" stroke="{t["border"]}"/>'
     )
 
     out.append(
-        f'  <text x="30" y="34" font-family="Georgia, Times New Roman, serif" font-size="21" fill="{t["title"]}">Core Repository Languages</text>'
+        f'  <text x="36" y="34" font-family="Georgia, Times New Roman, serif" font-size="24" fill="{t["title"]}">Core Repository Languages</text>'
     )
     out.append(
-        f'  <text x="30" y="52" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" fill="{t["muted"]}">owned public non-fork repositories · GitHub language bytes</text>'
+        f'  <text x="36" y="54" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11" fill="{t["muted"]}">owned public non-fork repositories · GitHub language bytes</text>'
     )
 
     out.append(
-        f'  <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="6" fill="{t["track"]}" stroke="{t["border"]}"/>'
+        f'  <rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7" fill="{t["track"]}" stroke="{t["border"]}"/>'
     )
     out.append(f'  <g clip-path="url(#{clip_id})">')
 
@@ -223,9 +228,9 @@ def make_svg(total, repo_count, theme_name):
 
     out.append("  </g>")
 
-    # 固定两行三列。最多 6 个图例：5 个具名语言 + Other。
-    col_x = [34, 200, 366]
-    row_y = [134, 174]
+    # 固定两行三列。无论语言怎么杂，都最多显示 6 项。
+    col_x = [48, 300, 548]
+    row_y = [128, 168]
 
     for i, (lang, n) in enumerate(langs[:6]):
         col = i % 3
@@ -236,16 +241,16 @@ def make_svg(total, repo_count, theme_name):
         pct = 100 * n / total_bytes
         name = display_name(lang)
 
-        out.append(f'  <circle cx="{lx + 6}" cy="{ly - 5}" r="5.5" fill="{color_for(lang)}"/>')
+        out.append(f'  <circle cx="{lx + 7}" cy="{ly - 6}" r="6.5" fill="{color_for(lang)}"/>')
         out.append(
-            f'  <text x="{lx + 20}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="{t["text"]}">{esc(name)}</text>'
+            f'  <text x="{lx + 24}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="600" fill="{t["text"]}">{esc(name)}</text>'
         )
         out.append(
-            f'  <text x="{lx + 104}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="{t["muted"]}">{pct:.1f}%</text>'
+            f'  <text x="{lx + 126}" y="{ly}" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" fill="{t["muted"]}">{pct:.1f}%</text>'
         )
 
     out.append(
-        f'  <text x="30" y="232" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="9.5" fill="{t["muted"]}">Repos counted: {repo_count} · Forks, archived repositories, and the profile repository are excluded.</text>'
+        f'  <text x="36" y="204" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="10" fill="{t["muted"]}">Repos counted: {repo_count} · Forks, archived repositories, and the profile repository are excluded.</text>'
     )
 
     out.append("</svg>")
@@ -259,10 +264,12 @@ def main():
     Path("assets").mkdir(exist_ok=True)
 
     Path("assets/core-repo-languages-light.svg").write_text(
-        make_svg(total, len(repos), "light")
+        make_svg(total, len(repos), "light"),
+        encoding="utf-8",
     )
     Path("assets/core-repo-languages-dark.svg").write_text(
-        make_svg(total, len(repos), "dark")
+        make_svg(total, len(repos), "dark"),
+        encoding="utf-8",
     )
 
     langs, total_bytes = select_display_languages(total)
