@@ -56,20 +56,13 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
 ## GitHub Activity
 
 <p align="center">
-  <img src="./profile-summary-card-output/github/0-profile-details.svg#gh-light-mode-only" alt="GitHub profile details" width="82%" />
-  <img src="./profile-summary-card-output/github_dark/0-profile-details.svg#gh-dark-mode-only" alt="GitHub profile details" width="82%" />
+  <img src="./assets/profile-activity-light.svg#gh-light-mode-only" alt="GitHub activity summary" width="78%" />
+  <img src="./assets/profile-activity-dark.svg#gh-dark-mode-only" alt="GitHub activity summary" width="78%" />
 </p>
 
-<p align="center">
-  <img src="./profile-summary-card-output/github/2-most-commit-language.svg#gh-light-mode-only" alt="Most committed languages" width="40%" />
-  <img src="./profile-summary-card-output/github/3-stats.svg#gh-light-mode-only" alt="GitHub statistics" width="40%" />
-  <img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg#gh-dark-mode-only" alt="Most committed languages" width="40%" />
-  <img src="./profile-summary-card-output/github_dark/3-stats.svg#gh-dark-mode-only" alt="GitHub statistics" width="40%" />
-</p>
-
-<p align="center">
-  <img src="./assets/core-repo-languages-light.svg#gh-light-mode-only" alt="Core repository languages" width="70%" />
-  <img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="70%" />
+<p align="right">
+  <img src="./assets/signature-dark.svg#gh-light-mode-only" alt="Jesse signature" width="185" />
+  <img src="./assets/signature-light.svg#gh-dark-mode-only" alt="Jesse signature" width="185" />
 </p>
 
 <p align="right">
