@@ -2,27 +2,32 @@
 from __future__ import annotations
 
 import base64
-from functools import lru_cache
 from pathlib import Path
 
-EMBEDDED_FONT_FAMILY = "Lora Profile Cards"
-FONT_STACK_CSS = f'"{EMBEDDED_FONT_FAMILY}", Lora, Georgia, serif'
-FONT_FILE = Path(__file__).resolve().parents[1] / "assets" / "fonts" / "Lora-ProfileCards.ttf"
+EMBEDDED_FONT_FAMILY = "Garamond Libre Profile Cards"
+FONT_STACK_CSS = f'"{EMBEDDED_FONT_FAMILY}", "Garamond Libre", Georgia, serif'
+FONT_DIR = Path(__file__).resolve().parents[1] / "assets" / "fonts"
+FONT_FILES = {
+    400: FONT_DIR / "GaramondLibre-ProfileCards-Regular.otf",
+    700: FONT_DIR / "GaramondLibre-ProfileCards-Bold.otf",
+}
 
 
-@lru_cache(maxsize=1)
 def embedded_font_css() -> str:
-    data = base64.b64encode(FONT_FILE.read_bytes()).decode("ascii")
-    return (
-        "@font-face {"
-        f'font-family: "{EMBEDDED_FONT_FAMILY}";'
-        'src: url("data:font/ttf;base64,'
-        f"{data}"
-        '") format("truetype");'
-        "font-style: normal;"
-        "font-weight: 100 700;"
-        "}"
-    )
+    faces = []
+    for weight, font_file in FONT_FILES.items():
+        data = base64.b64encode(font_file.read_bytes()).decode("ascii")
+        faces.append(
+            "@font-face {"
+            f'font-family: "{EMBEDDED_FONT_FAMILY}";'
+            'src: url("data:font/otf;base64,'
+            f"{data}"
+            '") format("opentype");'
+            "font-style: normal;"
+            f"font-weight: {weight};"
+            "}"
+        )
+    return "\n".join(faces)
 
 
 def font_style_block(selector: str = "*") -> str:

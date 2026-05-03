@@ -49,7 +49,11 @@ def normalize_svg(svg: str, theme: str) -> str:
         count=1,
     )
 
-    svg = svg.replace('font-family="sans-serif"', f'font-family="{EMBEDDED_FONT_FAMILY}"')
+    svg = re.sub(
+        r'font-family="[^"]+"',
+        f'font-family="{EMBEDDED_FONT_FAMILY}"',
+        svg,
+    )
 
     return svg
 
