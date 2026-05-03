@@ -8,12 +8,12 @@ USER = os.environ.get("GITHUB_REPOSITORY_OWNER", "LwhJesse")
 CARDS = [
     ("profile-details", "0-profile-details.svg"),
     ("most-commit-language", "2-most-commit-language.svg"),
-    ("stats", "3-stats.svg"),
 ]
 
 THEMES = ["github", "github_dark"]
 
 BASE = "https://github-profile-summary-cards.vercel.app/api/cards"
+
 
 def fetch(url: str) -> bytes:
     req = urllib.request.Request(
@@ -22,6 +22,7 @@ def fetch(url: str) -> bytes:
     )
     with urllib.request.urlopen(req, timeout=60) as r:
         return r.read()
+
 
 def main():
     for theme in THEMES:
@@ -38,6 +39,7 @@ def main():
             path = outdir / filename
             path.write_bytes(data)
             print(f"wrote {path}")
+
 
 if __name__ == "__main__":
     main()
