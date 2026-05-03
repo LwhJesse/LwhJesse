@@ -71,13 +71,14 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
 
 ---
 
-<div align="center">
-
-Mechanics, solvers, GPU, and open-source systems.
-
-<br />
-<br />
-
-<img src="./assets/signature.svg" alt="Jesse signature" width="220" />
-
-</div>
+<table width="100%">
+  <tr>
+    <td align="left">
+      <sub>Mechanics, solvers, GPU, and open-source systems.</sub>
+    </td>
+    <td align="right">
+      <img src="./assets/signature-dark.svg#gh-light-mode-only" alt="Jesse signature" width="180" />
+      <img src="./assets/signature-light.svg#gh-dark-mode-only" alt="Jesse signature" width="180" />
+    </td>
+  </tr>
+</table>
