@@ -30,10 +30,6 @@ jobs:
         run: |
           python scripts/fetch-profile-summary-cards.py
 
-      - name: Postprocess profile summary cards
-        run: |
-          python scripts/postprocess-summary-cards.py
-
       - name: Generate core repository language cards
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
