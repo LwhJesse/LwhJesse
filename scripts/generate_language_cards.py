@@ -297,8 +297,18 @@ def xml_escape(text: str) -> str:
 
 
 def top_items(stats: Counter[str], limit: int = 6) -> list[tuple[str, int]]:
-    return [(language, value) for language, value in stats.most_common(limit) if value > 0]
+    positive_items = [(language, value) for language, value in stats.most_common() if value > 0]
 
+    if len(positive_items) <= limit:
+        return positive_items
+
+    head = positive_items[: limit - 1]
+    other_total = sum(value for _, value in positive_items[limit - 1 :])
+
+    if other_total > 0:
+        head.append(("Other", other_total))
+
+    return head
 
 def donut_arc_path(cx: float, cy: float, r_outer: float, r_inner: float, start: float, end: float) -> str:
     if end - start >= math.tau:
