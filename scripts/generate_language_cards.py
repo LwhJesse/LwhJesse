@@ -343,7 +343,7 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     # The profile card is rendered as 700px viewBox at 80% README width.
     # Language cards are rendered as 340px viewBox at 40.5% README width.
     # Match the final on-page title size, not only the raw SVG font-size.
-    title_style = title_style.replace("font-size: 22px", "font-size: 21.1px")
+    title_style = title_style.replace("font-size: 22px", "font-size: 18px")
     lines.append(f'<text x="30" y="40" style="{title_style}">{xml_escape(title)}</text>')
 
     if not items or total <= 0:
