@@ -327,7 +327,8 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     lines.append('<svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">')
     lines.append("<style>*{font-family:Georgia,serif}</style>")
     lines.append(f'<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="{border}" stroke-width="1" fill="{bg}" stroke-opacity="1"/>')
-    lines.append(f'<text x="30" y="40" style="font-size: 22px; font-weight: 700; fill: {text};">{xml_escape(title)}</text>')
+    title_color = "#2f81f7"
+    lines.append(f'<text x="30" y="40" style="font-size: 22px; font-weight: 700; fill: {title_color};">{xml_escape(title)}</text>')
 
     if not items or total <= 0:
         lines.append(f'<text x="40" y="95" style="fill: {text}; font-size: 14px;">No data yet</text>')
