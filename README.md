@@ -65,10 +65,10 @@ My recent work focuses on CUDA performance engineering, sparse matrix operations
 </div>
 
 <div align="center">
-  <img src="./profile-summary-card-output/github/2-most-commit-language.svg#gh-light-mode-only" alt="Top languages by commit" width="40.5%" />
-  <img src="./profile-summary-card-output/github_dark/2-most-commit-language.svg#gh-dark-mode-only" alt="Top languages by commit" width="40.5%" />
-  <img src="./assets/core-repo-languages-light.svg#gh-light-mode-only" alt="Core repository languages" width="40.5%" />
-  <img src="./assets/core-repo-languages-dark.svg#gh-dark-mode-only" alt="Core repository languages" width="40.5%" />
+  <img src="./assets/external-contribution-languages-light.svg#gh-light-mode-only" alt="External contribution languages" width="40.5%" />
+  <img src="./assets/external-contribution-languages-dark.svg#gh-dark-mode-only" alt="External contribution languages" width="40.5%" />
+  <img src="./assets/own-repository-languages-light.svg#gh-light-mode-only" alt="Own repository languages" width="40.5%" />
+  <img src="./assets/own-repository-languages-dark.svg#gh-dark-mode-only" alt="Own repository languages" width="40.5%" />
 </div>
 
 <br>

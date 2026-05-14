@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">
+<style>*{font-family:Georgia,serif}</style>
+<rect x="1" y="1" rx="6" ry="6" width="338" height="198" fill="#0d1117" stroke="#30363d"/>
+<text x="24" y="35" font-size="20" font-weight="600" fill="#c9d1d9">External Contribution Languages</text>
+<rect x="24" y="50" width="10" height="10" rx="2" fill="#f34b7d"/>
+<text x="42" y="60" font-size="13" fill="#c9d1d9">C++</text>
+<rect x="155" y="50" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="50" width="150" height="10" rx="4" fill="#f34b7d"/>
+<text x="312" y="60" font-size="12" text-anchor="end" fill="#8b949e">47.5%</text>
+<rect x="24" y="72" width="10" height="10" rx="2" fill="#76b900"/>
+<text x="42" y="82" font-size="13" fill="#c9d1d9">CUDA</text>
+<rect x="155" y="72" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="72" width="130" height="10" rx="4" fill="#76b900"/>
+<text x="312" y="82" font-size="12" text-anchor="end" fill="#8b949e">41.2%</text>
+<rect x="24" y="94" width="10" height="10" rx="2" fill="#083fa1"/>
+<text x="42" y="104" font-size="13" fill="#c9d1d9">Markdown</text>
+<rect x="155" y="94" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="94" width="17" height="10" rx="4" fill="#083fa1"/>
+<text x="312" y="104" font-size="12" text-anchor="end" fill="#8b949e">5.5%</text>
+<rect x="24" y="116" width="10" height="10" rx="2" fill="#5686a5"/>
+<text x="42" y="126" font-size="13" fill="#c9d1d9">GLSL</text>
+<rect x="155" y="116" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="116" width="9" height="10" rx="4" fill="#5686a5"/>
+<text x="312" y="126" font-size="12" text-anchor="end" fill="#8b949e">3.0%</text>
+<rect x="24" y="138" width="10" height="10" rx="2" fill="#555555"/>
+<text x="42" y="148" font-size="13" fill="#c9d1d9">C</text>
+<rect x="155" y="138" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="138" width="8" height="10" rx="4" fill="#555555"/>
+<text x="312" y="148" font-size="12" text-anchor="end" fill="#8b949e">2.6%</text>
+<rect x="24" y="160" width="10" height="10" rx="2" fill="#141414"/>
+<text x="42" y="170" font-size="13" fill="#c9d1d9">reStructuredText</text>
+<rect x="155" y="160" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="160" width="4" height="10" rx="4" fill="#141414"/>
+<text x="312" y="170" font-size="12" text-anchor="end" fill="#8b949e">0.2%</text>
+</svg>

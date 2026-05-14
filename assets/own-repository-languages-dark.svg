@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">
+<style>*{font-family:Georgia,serif}</style>
+<rect x="1" y="1" rx="6" ry="6" width="338" height="198" fill="#0d1117" stroke="#30363d"/>
+<text x="24" y="35" font-size="20" font-weight="600" fill="#c9d1d9">Own Repository Languages</text>
+<rect x="24" y="50" width="10" height="10" rx="2" fill="#3572A5"/>
+<text x="42" y="60" font-size="13" fill="#c9d1d9">Python</text>
+<rect x="155" y="50" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="50" width="150" height="10" rx="4" fill="#3572A5"/>
+<text x="312" y="60" font-size="12" text-anchor="end" fill="#8b949e">59.6%</text>
+<rect x="24" y="72" width="10" height="10" rx="2" fill="#6e7681"/>
+<text x="42" y="82" font-size="13" fill="#c9d1d9">Cuda</text>
+<rect x="155" y="72" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="72" width="50" height="10" rx="4" fill="#6e7681"/>
+<text x="312" y="82" font-size="12" text-anchor="end" fill="#8b949e">20.0%</text>
+<rect x="24" y="94" width="10" height="10" rx="2" fill="#f34b7d"/>
+<text x="42" y="104" font-size="13" fill="#c9d1d9">C++</text>
+<rect x="155" y="94" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="94" width="21" height="10" rx="4" fill="#f34b7d"/>
+<text x="312" y="104" font-size="12" text-anchor="end" fill="#8b949e">8.6%</text>
+<rect x="24" y="116" width="10" height="10" rx="2" fill="#f1e05a"/>
+<text x="42" y="126" font-size="13" fill="#c9d1d9">JavaScript</text>
+<rect x="155" y="116" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="116" width="20" height="10" rx="4" fill="#f1e05a"/>
+<text x="312" y="126" font-size="12" text-anchor="end" fill="#8b949e">8.0%</text>
+<rect x="24" y="138" width="10" height="10" rx="2" fill="#89e051"/>
+<text x="42" y="148" font-size="13" fill="#c9d1d9">Shell</text>
+<rect x="155" y="138" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="138" width="8" height="10" rx="4" fill="#89e051"/>
+<text x="312" y="148" font-size="12" text-anchor="end" fill="#8b949e">3.4%</text>
+<rect x="24" y="160" width="10" height="10" rx="2" fill="#DA3434"/>
+<text x="42" y="170" font-size="13" fill="#c9d1d9">CMake</text>
+<rect x="155" y="160" width="150" height="10" rx="4" fill="#30363d"/>
+<rect x="155" y="160" width="4" height="10" rx="4" fill="#DA3434"/>
+<text x="312" y="170" font-size="12" text-anchor="end" fill="#8b949e">0.4%</text>
+</svg>
