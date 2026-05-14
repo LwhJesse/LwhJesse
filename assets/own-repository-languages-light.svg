@@ -1,35 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">
 <style>*{font-family:Georgia,serif}</style>
-<rect x="1" y="1" rx="6" ry="6" width="338" height="198" fill="#ffffff" stroke="#d0d7de"/>
-<text x="24" y="35" font-size="20" font-weight="600" fill="#24292f">Own Repository Languages</text>
-<rect x="24" y="50" width="10" height="10" rx="2" fill="#3572A5"/>
-<text x="42" y="60" font-size="13" fill="#24292f">Python</text>
-<rect x="155" y="50" width="150" height="10" rx="4" fill="#d0d7de"/>
-<rect x="155" y="50" width="150" height="10" rx="4" fill="#3572A5"/>
-<text x="312" y="60" font-size="12" text-anchor="end" fill="#57606a">59.6%</text>
-<rect x="24" y="72" width="10" height="10" rx="2" fill="#6e7681"/>
-<text x="42" y="82" font-size="13" fill="#24292f">Cuda</text>
-<rect x="155" y="72" width="150" height="10" rx="4" fill="#d0d7de"/>
-<rect x="155" y="72" width="50" height="10" rx="4" fill="#6e7681"/>
-<text x="312" y="82" font-size="12" text-anchor="end" fill="#57606a">20.0%</text>
-<rect x="24" y="94" width="10" height="10" rx="2" fill="#f34b7d"/>
-<text x="42" y="104" font-size="13" fill="#24292f">C++</text>
-<rect x="155" y="94" width="150" height="10" rx="4" fill="#d0d7de"/>
-<rect x="155" y="94" width="21" height="10" rx="4" fill="#f34b7d"/>
-<text x="312" y="104" font-size="12" text-anchor="end" fill="#57606a">8.6%</text>
-<rect x="24" y="116" width="10" height="10" rx="2" fill="#f1e05a"/>
-<text x="42" y="126" font-size="13" fill="#24292f">JavaScript</text>
-<rect x="155" y="116" width="150" height="10" rx="4" fill="#d0d7de"/>
-<rect x="155" y="116" width="20" height="10" rx="4" fill="#f1e05a"/>
-<text x="312" y="126" font-size="12" text-anchor="end" fill="#57606a">8.0%</text>
-<rect x="24" y="138" width="10" height="10" rx="2" fill="#89e051"/>
-<text x="42" y="148" font-size="13" fill="#24292f">Shell</text>
-<rect x="155" y="138" width="150" height="10" rx="4" fill="#d0d7de"/>
-<rect x="155" y="138" width="8" height="10" rx="4" fill="#89e051"/>
-<text x="312" y="148" font-size="12" text-anchor="end" fill="#57606a">3.4%</text>
-<rect x="24" y="160" width="10" height="10" rx="2" fill="#DA3434"/>
-<text x="42" y="170" font-size="13" fill="#24292f">CMake</text>
-<rect x="155" y="160" width="150" height="10" rx="4" fill="#d0d7de"/>
-<rect x="155" y="160" width="4" height="10" rx="4" fill="#DA3434"/>
-<text x="312" y="170" font-size="12" text-anchor="end" fill="#57606a">0.4%</text>
+<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="#d0d7de" stroke-width="1" fill="#ffffff" stroke-opacity="1"/>
+<text x="30" y="40" style="font-size: 22px; font-weight: 700; fill: #24292f;">Own Repo Languages</text>
+<rect x="40" y="60" width="14" height="14" rx="2" fill="#3572A5" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="72" style="fill: #24292f; font-size: 14px;">Python</text>
+<rect x="40" y="82" width="14" height="14" rx="2" fill="#6e7681" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="94" style="fill: #24292f; font-size: 14px;">Cuda</text>
+<rect x="40" y="104" width="14" height="14" rx="2" fill="#f34b7d" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="116" style="fill: #24292f; font-size: 14px;">C++</text>
+<rect x="40" y="126" width="14" height="14" rx="2" fill="#f1e05a" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="138" style="fill: #24292f; font-size: 14px;">JavaScript</text>
+<rect x="40" y="148" width="14" height="14" rx="2" fill="#89e051" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="160" style="fill: #24292f; font-size: 14px;">Shell</text>
+<rect x="40" y="170" width="14" height="14" rx="2" fill="#DA3434" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="182" style="fill: #24292f; font-size: 14px;">CMake</text>
+<path d="M238.000,54.000 A58.000,58.000,0,1,1,205.135,159.790 L218.734,140.015 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #3572A5; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M205.135,159.790 A58.000,58.000,0,0,1,182.422,95.415 L205.420,102.278 A34.000,34.000,0,0,0,218.734,140.015 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M182.422,95.415 A58.000,58.000,0,0,1,198.992,69.077 L215.133,86.838 A34.000,34.000,0,0,0,205.420,102.278 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M198.992,69.077 A58.000,58.000,0,0,1,224.340,55.632 L229.992,78.956 A34.000,34.000,0,0,0,215.133,86.838 Z" style="fill: #f1e05a; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M224.340,55.632 A58.000,58.000,0,0,1,236.528,54.019 L237.137,78.011 A34.000,34.000,0,0,0,229.992,78.956 Z" style="fill: #89e051; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M236.528,54.019 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,237.137,78.011 Z" style="fill: #DA3434; stroke-width: 2px;" stroke="#d0d7de"/>
 </svg>

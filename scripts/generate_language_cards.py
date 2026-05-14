@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 import time
@@ -287,52 +288,87 @@ def top_items(stats: Counter[str], limit: int = 6) -> list[tuple[str, int]]:
     return [(language, value) for language, value in stats.most_common(limit) if value > 0]
 
 
+def donut_arc_path(cx: float, cy: float, r_outer: float, r_inner: float, start: float, end: float) -> str:
+    if end - start >= math.tau:
+        end = start + math.tau - 0.0001
+
+    large_arc = 1 if end - start > math.pi else 0
+
+    x1 = cx + r_outer * math.cos(start)
+    y1 = cy + r_outer * math.sin(start)
+    x2 = cx + r_outer * math.cos(end)
+    y2 = cy + r_outer * math.sin(end)
+
+    x3 = cx + r_inner * math.cos(end)
+    y3 = cy + r_inner * math.sin(end)
+    x4 = cx + r_inner * math.cos(start)
+    y4 = cy + r_inner * math.sin(start)
+
+    return (
+        f"M{x1:.3f},{y1:.3f} "
+        f"A{r_outer:.3f},{r_outer:.3f},0,{large_arc},1,{x2:.3f},{y2:.3f} "
+        f"L{x3:.3f},{y3:.3f} "
+        f"A{r_inner:.3f},{r_inner:.3f},0,{large_arc},0,{x4:.3f},{y4:.3f} "
+        "Z"
+    )
+
+
 def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
-    items = top_items(stats)
+    items = top_items(stats, limit=6)
     total = sum(value for _, value in items)
 
     bg = "#0d1117" if dark else "#ffffff"
     border = "#30363d" if dark else "#d0d7de"
     text = "#c9d1d9" if dark else "#24292f"
-    muted = "#8b949e" if dark else "#57606a"
 
+    # Match the old summary-card structure:
+    # title on top, legend on the left, donut chart on the right.
     lines: list[str] = []
     lines.append('<svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">')
     lines.append("<style>*{font-family:Georgia,serif}</style>")
-    lines.append(f'<rect x="1" y="1" rx="6" ry="6" width="338" height="198" fill="{bg}" stroke="{border}"/>')
-    lines.append(f'<text x="24" y="35" font-size="20" font-weight="600" fill="{text}">{xml_escape(title)}</text>')
+    lines.append(f'<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="{border}" stroke-width="1" fill="{bg}" stroke-opacity="1"/>')
+    lines.append(f'<text x="30" y="40" style="font-size: 22px; font-weight: 700; fill: {text};">{xml_escape(title)}</text>')
 
     if not items or total <= 0:
-        lines.append(f'<text x="24" y="95" font-size="14" fill="{muted}">No data yet</text>')
-    else:
-        max_value = max(value for _, value in items)
-        y = 60
+        lines.append(f'<text x="40" y="95" style="fill: {text}; font-size: 14px;">No data yet</text>')
+        lines.append("</svg>")
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return
 
-        for language, value in items:
-            color = LANG_COLORS.get(language, LANG_COLORS["Other"])
-            percent = value / total * 100
-            bar_width = max(4, int(150 * value / max_value))
+    legend_x = 40
+    legend_y = 70
+    row_gap = 22
 
-            lines.append(f'<rect x="24" y="{y - 10}" width="10" height="10" rx="2" fill="{color}"/>')
-            lines.append(f'<text x="42" y="{y}" font-size="13" fill="{text}">{xml_escape(language)}</text>')
-            lines.append(f'<rect x="155" y="{y - 10}" width="150" height="10" rx="4" fill="{border}"/>')
-            lines.append(f'<rect x="155" y="{y - 10}" width="{bar_width}" height="10" rx="4" fill="{color}"/>')
-            lines.append(f'<text x="312" y="{y}" font-size="12" text-anchor="end" fill="{muted}">{percent:.1f}%</text>')
+    for i, (language, _) in enumerate(items):
+        y = legend_y + i * row_gap
+        color = LANG_COLORS.get(language, LANG_COLORS["Other"])
+        lines.append(f'<rect x="{legend_x}" y="{y - 10}" width="14" height="14" rx="2" fill="{color}" stroke="{border}" style="stroke-width: 1px;"/>')
+        lines.append(f'<text x="{legend_x + 22}" y="{y + 2}" style="fill: {text}; font-size: 14px;">{xml_escape(language)}</text>')
 
-            y += 22
+    cx = 238
+    cy = 112
+    r_outer = 58
+    r_inner = 34
+    angle = -math.pi / 2
+
+    for language, value in items:
+        color = LANG_COLORS.get(language, LANG_COLORS["Other"])
+        next_angle = angle + math.tau * (value / total)
+        path_data = donut_arc_path(cx, cy, r_outer, r_inner, angle, next_angle)
+        lines.append(f'<path d="{path_data}" style="fill: {color}; stroke-width: 2px;" stroke="{border}"/>')
+        angle = next_angle
 
     lines.append("</svg>")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
 
 def main() -> None:
     external = external_contribution_languages()
     own = own_repository_languages()
 
-    write_svg(OUT_DIR / "external-contribution-languages-light.svg", "External Contribution Languages", external, dark=False)
-    write_svg(OUT_DIR / "external-contribution-languages-dark.svg", "External Contribution Languages", external, dark=True)
-    write_svg(OUT_DIR / "own-repository-languages-light.svg", "Own Repository Languages", own, dark=False)
-    write_svg(OUT_DIR / "own-repository-languages-dark.svg", "Own Repository Languages", own, dark=True)
+    write_svg(OUT_DIR / "external-contribution-languages-light.svg", "External PR Languages", external, dark=False)
+    write_svg(OUT_DIR / "external-contribution-languages-dark.svg", "External PR Languages", external, dark=True)
+    write_svg(OUT_DIR / "own-repository-languages-light.svg", "Own Repo Languages", own, dark=False)
+    write_svg(OUT_DIR / "own-repository-languages-dark.svg", "Own Repo Languages", own, dark=True)
 
     print("external contribution languages:", dict(external.most_common()))
     print("own repository languages:", dict(own.most_common()))
