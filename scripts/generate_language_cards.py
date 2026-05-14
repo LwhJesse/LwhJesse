@@ -340,6 +340,10 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     lines.append('<style>* { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, serif; }</style>')
     lines.append(f'<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="{border}" stroke-width="1" fill="{bg}" stroke-opacity="1"/>')
     title_style = get_profile_title_style(dark)
+    # The profile card is rendered as 700px viewBox at 80% README width.
+    # Language cards are rendered as 340px viewBox at 40.5% README width.
+    # Match the final on-page title size, not only the raw SVG font-size.
+    title_style = title_style.replace("font-size: 22px", "font-size: 21.1px")
     lines.append(f'<text x="30" y="40" style="{title_style}">{xml_escape(title)}</text>')
 
     if not items or total <= 0:
