@@ -5,9 +5,9 @@
 
 <div align="center">
 
-### Engineering Mechanics · Numerical Computing · Open Source Systems
+### GPU Numerical Linear Algebra · Scientific Computing · Open Source Systems
 
-**CFD · FEM · GPU Linear Algebra · Linux Graphics · Arch Linux**
+**CUDA · Sparse Solvers · CFD Linear Algebra · Linux Graphics · Arch Linux**
 
 </div>
 
@@ -15,34 +15,37 @@
 
 ## About
 
-I am an Engineering Mechanics undergraduate focused on numerical computing, GPU acceleration, and open-source systems.
+I am an Engineering Mechanics undergraduate working on GPU numerical linear algebra, scientific computing, and open-source systems.
 
-My current work sits around nonlinear mechanics, finite element simulation, CFD solvers, GPU-side linear algebra, and Linux desktop infrastructure. I like projects where mathematics, engineering judgment, and low-level systems work meet each other.
+My recent work focuses on CUDA performance engineering, sparse matrix operations, CFD linear algebra infrastructure, and graphics-pipeline debugging, especially where numerical methods meet low-level system behavior.
 
 ## Current Focus
 
-- **Scientific computing** — numerical methods, nonlinear mechanics, FEM validation, and solver behavior.
-- **GPU acceleration** — CUDA-side data movement, sparse linear algebra, and solver performance.
-- **CFD / solver infrastructure** — SU2, OpenFOAM, and the linear algebra path beneath large-scale simulation codes.
-- **Linux desktop systems** — Arch Linux, Hyprland, rendering behavior, ICC/color pipeline issues, and compositor debugging.
-- **Open-source maintenance** — AUR packaging and upstream contribution workflows.
+- **GPU performance engineering** — CUDA data movement, sparse matrix-vector products, batched GEMM paths, and solver-side performance.
+- **Solver correctness and infrastructure** — block-sparse matrix operations, Krylov-solver data flow, and CFD linear algebra paths.
+- **Scientific computing** — numerical methods, FEM validation, nonlinear mechanics, and simulation reliability.
+- **Linux graphics systems** — Hyprland rendering behavior, ICC/color pipeline issues, blur/transparency debugging, and compositor testing.
+- **Open-source contribution workflow** — focused upstream PRs with reproducible benchmarks, minimal patches, and clear validation notes.
 
 ## Selected Work
 
-- **SU2 GPU linear algebra optimization**  
-  Reducing redundant CUDA-side matrix transfers and improving solver data movement across repeated matrix-vector operations.
+- **SU2 CUDA linear algebra path**  
+  Reducing redundant Jacobian uploads during linear solves and investigating CUDA block-sparse matvec correctness in the GPU solver path.
+
+- **CUDA sparse solver optimization**  
+  Reusing cuSPARSE SpMV preprocessing in AMGCL's CUDA CSR backend to reduce repeated CSR partition/preprocessing overhead in iterative solves.
+
+- **ArrayFire CUDA batched GEMM**  
+  Adding a strided-batched GEMM fast path for compatible batch layouts to avoid pointer-array setup and host-to-device pointer copies.
 
 - **Hyprland ICC / blur rendering investigation**  
-  Debugging ICC-enabled blur transparency behavior on a high-refresh 10-bit display pipeline.
+  Debugging ICC-enabled blur transparency behavior, compositor work-buffer image descriptions, and color-pipeline interactions on a high-refresh laptop display.
 
 - **Nonlinear beam deflection computation**  
   Numerical calculation and FEM validation for the failure boundary of linear beam theory under large deflection.
 
-- **OpenSeesPy on AUR**  
-  Maintaining structural analysis tooling for Arch Linux users.
-
-- **reinplayer-bin on AUR**  
-  Packaging and maintaining desktop/media tooling for Arch Linux.
+- **Arch Linux scientific tooling**  
+  Maintaining AUR packages and documentation paths for engineering/scientific software such as OpenSeesPy.
 
 ## Technical Stack
 
@@ -50,7 +53,7 @@ My current work sits around nonlinear mechanics, finite element simulation, CFD 
 
 `C++` · `CUDA` · `Python` · `Shell` · `Lua` · `Git` · `Linux` · `Arch Linux` · `Neovim`
 
-`SU2` · `OpenFOAM` · `OpenSees` · `Hyprland` · `FEM` · `CFD` · `Numerical Linear Algebra`
+`SU2` · `amgcl` · `ArrayFire` · `CUTLASS` · `OpenFOAM` · `OpenSees` · `Hyprland` · `FEM` · `CFD` · `Numerical Linear Algebra`
 
 </div>
 
