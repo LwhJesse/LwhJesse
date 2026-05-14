@@ -8,6 +8,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -275,6 +276,17 @@ def own_repository_languages() -> Counter[str]:
     return stats
 
 
+
+def get_profile_title_style(dark: bool) -> str:
+    svg_path = Path("profile-summary-card-output/github_dark/0-profile-details.svg" if dark else "profile-summary-card-output/github/0-profile-details.svg")
+    root = ET.fromstring(svg_path.read_text(encoding="utf-8"))
+    for elem in root.iter():
+        if elem.tag.endswith("text") and (elem.text or "").strip() == USER:
+            style = elem.attrib.get("style", "").strip()
+            if style:
+                return style
+    raise RuntimeError(f"Could not find title style for {USER} in {svg_path}")
+
 def xml_escape(text: str) -> str:
     return (
         text.replace("&", "&amp;")
@@ -327,9 +339,8 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     lines.append('<svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">')
     lines.append("<style>*{font-family:Georgia,serif}</style>")
     lines.append(f'<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="{border}" stroke-width="1" fill="{bg}" stroke-opacity="1"/>')
-    title_color = "#2f81f7"
-    title_font_size = 22
-    lines.append(f'<text x="30" y="40" style="font-size: {title_font_size}px; fill: {title_color};">{xml_escape(title)}</text>')
+    title_style = get_profile_title_style(dark)
+    lines.append(f'<text x="30" y="40" style="{title_style}">{xml_escape(title)}</text>')
 
     if not items or total <= 0:
         lines.append(f'<text x="40" y="95" style="fill: {text}; font-size: 14px;">No data yet</text>')
