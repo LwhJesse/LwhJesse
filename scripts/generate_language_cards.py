@@ -398,6 +398,12 @@ def own_repository_languages() -> Counter[str]:
 
             language = language_from_filename(file_path)
 
+            # Own Repo Languages is source-focused. Markdown documentation is
+            # intentionally excluded here. External PR Languages still counts
+            # Markdown PR changes normally.
+            if language == "Markdown":
+                continue
+
             branch_url = urllib.parse.quote(default_branch, safe="")
             path_url = urllib.parse.quote(file_path, safe="/")
             raw_url = f"https://raw.githubusercontent.com/{USER}/{name}/{branch_url}/{path_url}"
