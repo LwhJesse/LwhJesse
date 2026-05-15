@@ -2,8 +2,8 @@
 <style>* { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, serif; }</style>
 <rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="#30363d" stroke-width="1" fill="#0d1117" stroke-opacity="1"/>
 <text x="30" y="40" style="font-size: 18px; font-weight: 600; fill: #2f81f7;">Own Repo Languages</text>
-<rect x="40" y="60" width="14" height="14" rx="2" fill="#FFCFAB" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="72" style="fill: #c9d1d9; font-size: 14px;">GCC Machine Description</text>
+<rect x="40" y="60" width="14" height="14" rx="2" fill="#083fa1" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="72" style="fill: #c9d1d9; font-size: 14px;">Markdown</text>
 <rect x="40" y="82" width="14" height="14" rx="2" fill="#3572A5" stroke="#30363d" style="stroke-width: 1px;"/>
 <text x="62" y="94" style="fill: #c9d1d9; font-size: 14px;">Python</text>
 <rect x="40" y="104" width="14" height="14" rx="2" fill="#3A4E3A" stroke="#30363d" style="stroke-width: 1px;"/>
@@ -14,7 +14,7 @@
 <text x="62" y="160" style="fill: #c9d1d9; font-size: 14px;">C++</text>
 <rect x="40" y="170" width="14" height="14" rx="2" fill="#6e7681" stroke="#30363d" style="stroke-width: 1px;"/>
 <text x="62" y="182" style="fill: #c9d1d9; font-size: 14px;">Other</text>
-<path d="M238.000,54.000 A58.000,58.000,0,0,1,253.346,167.933 L246.996,144.788 A34.000,34.000,0,0,0,238.000,78.000 Z" style="fill: #FFCFAB; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M238.000,54.000 A58.000,58.000,0,0,1,253.346,167.933 L246.996,144.788 A34.000,34.000,0,0,0,238.000,78.000 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#30363d"/>
 <path d="M253.346,167.933 A58.000,58.000,0,0,1,181.904,126.740 L205.116,120.641 A34.000,34.000,0,0,0,246.996,144.788 Z" style="fill: #3572A5; stroke-width: 2px;" stroke="#30363d"/>
 <path d="M181.904,126.740 A58.000,58.000,0,0,1,184.581,89.409 L206.685,98.757 A34.000,34.000,0,0,0,205.116,120.641 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#30363d"/>
 <path d="M184.581,89.409 A58.000,58.000,0,0,1,194.888,73.201 L212.728,89.256 A34.000,34.000,0,0,0,206.685,98.757 Z" style="fill: #f1e05a; stroke-width: 2px;" stroke="#30363d"/>

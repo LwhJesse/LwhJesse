@@ -19,6 +19,18 @@ API = "https://api.github.com"
 LINGUIST_LANGUAGES_URL = "https://raw.githubusercontent.com/github-linguist/linguist/main/lib/linguist/languages.yml"
 OTHER_COLOR = "#6e7681"
 
+# GitHub Linguist has ambiguous extensions. For this profile card, we want
+# common source/document suffix semantics: .md means Markdown, not GCC MD.
+EXTENSION_OVERRIDES = {
+    ".md": "Markdown",
+    ".markdown": "Markdown",
+    ".mdown": "Markdown",
+    ".mkd": "Markdown",
+    ".mkdn": "Markdown",
+    ".cu": "Cuda",
+    ".cuh": "Cuda",
+}
+
 TOKEN = (
     os.environ.get("GITHUB_TOKEN")
     or os.environ.get("GH_TOKEN")
@@ -215,6 +227,10 @@ def language_from_filename(filename: str) -> str:
     if base in filename_language:
         return filename_language[base]
 
+    for extension, language in sorted(EXTENSION_OVERRIDES.items(), key=lambda item: len(item[0]), reverse=True):
+        if filename.endswith(extension):
+            return language
+
     for extension in sorted(extension_language, key=len, reverse=True):
         if filename.endswith(extension):
             return extension_language[extension]
@@ -380,6 +396,12 @@ def get_profile_title_style(dark: bool) -> str:
     raise RuntimeError(f"Could not find title style for {USER} in {svg_path}")
 
 
+def display_language_name(language: str, max_chars: int = 18) -> str:
+    if len(language) <= max_chars:
+        return language
+    return language[: max_chars - 1] + "…"
+
+
 def xml_escape(text: str) -> str:
     return (
         text.replace("&", "&amp;")
@@ -463,7 +485,8 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
         color = language_color(language)
 
         lines.append(f'<rect x="{legend_x}" y="{y - 10}" width="14" height="14" rx="2" fill="{color}" stroke="{border}" style="stroke-width: 1px;"/>')
-        lines.append(f'<text x="{legend_x + 22}" y="{y + 2}" style="fill: {text}; font-size: 14px;">{xml_escape(language)}</text>')
+        label = display_language_name(language)
+        lines.append(f'<text x="{legend_x + 22}" y="{y + 2}" style="fill: {text}; font-size: 14px;">{xml_escape(label)}</text>')
 
     cx = 238
     cy = 112
