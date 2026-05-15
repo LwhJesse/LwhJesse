@@ -4,6 +4,7 @@ import json
 import math
 import os
 import re
+import ssl
 import time
 import urllib.error
 import urllib.parse
@@ -15,6 +16,9 @@ from typing import Any
 
 USER = "LwhJesse"
 API = "https://api.github.com"
+LINGUIST_LANGUAGES_URL = "https://raw.githubusercontent.com/github-linguist/linguist/main/lib/linguist/languages.yml"
+OTHER_COLOR = "#6e7681"
+
 TOKEN = (
     os.environ.get("GITHUB_TOKEN")
     or os.environ.get("GH_TOKEN")
@@ -24,70 +28,8 @@ TOKEN = (
 OUT_DIR = Path("assets")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-LANG_COLORS = {
-    "C++": "#f34b7d",
-    "C": "#555555",
-    "Cuda": "#3A4E3A",
-    "Python": "#3572A5",
-    "Markdown": "#083fa1",
-    "GLSL": "#5686a5",
-    "JavaScript": "#f1e05a",
-    "Shell": "#89e051",
-    "CMake": "#DA3434",
-    "reStructuredText": "#141414",
-    "Other": "#6e7681",
-}
 
-LANGUAGE_ALIASES = {
-    "CUDA": "Cuda",
-    "Cuda": "Cuda",
-    "C/C++": "C",
-}
-
-EXTENSION_LANGUAGE = {
-    ".cu": "CUDA",
-    ".cuh": "CUDA",
-    ".cpp": "C++",
-    ".cc": "C++",
-    ".cxx": "C++",
-    ".hpp": "C++",
-    ".hh": "C++",
-    ".hxx": "C++",
-    ".c": "C",
-    ".h": "C/C++",
-    ".glsl": "GLSL",
-    ".frag": "GLSL",
-    ".vert": "GLSL",
-    ".comp": "GLSL",
-    ".py": "Python",
-    ".sh": "Shell",
-    ".bash": "Shell",
-    ".zsh": "Shell",
-    ".lua": "Lua",
-    ".md": "Markdown",
-    ".rst": "reStructuredText",
-    ".yml": "YAML",
-    ".yaml": "YAML",
-    ".json": "JSON",
-    ".toml": "TOML",
-    ".js": "JavaScript",
-    ".jsx": "JavaScript",
-    ".ts": "TypeScript",
-    ".tsx": "TypeScript",
-    ".html": "HTML",
-    ".css": "CSS",
-    ".dart": "Dart",
-    ".cmake": "CMake",
-}
-
-SPECIAL_FILENAMES = {
-    "CMakeLists.txt": "CMake",
-    "Makefile": "Makefile",
-    "Dockerfile": "Dockerfile",
-}
-
-
-def request_json(url: str) -> tuple[Any, dict[str, str]]:
+def github_headers() -> dict[str, str]:
     headers = {
         "Accept": "application/vnd.github+json",
         "User-Agent": "LwhJesse-profile-language-cards",
@@ -95,16 +37,36 @@ def request_json(url: str) -> tuple[Any, dict[str, str]]:
     }
     if TOKEN:
         headers["Authorization"] = f"Bearer {TOKEN}"
+    return headers
 
-    req = urllib.request.Request(url, headers=headers)
 
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            body = resp.read().decode("utf-8")
-            return json.loads(body), dict(resp.headers)
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"GitHub API failed: {e.code} {url}\n{detail}") from e
+def request_bytes(url: str, headers: dict[str, str] | None = None, retries: int = 4) -> tuple[bytes, dict[str, str]]:
+    last_error: Exception | None = None
+
+    for attempt in range(1, retries + 1):
+        req = urllib.request.Request(url, headers=headers or {"User-Agent": "LwhJesse-profile-language-cards"})
+
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return resp.read(), dict(resp.headers)
+        except (urllib.error.URLError, TimeoutError, ssl.SSLError, ConnectionResetError) as error:
+            last_error = error
+            if attempt < retries:
+                time.sleep(1.5 * attempt)
+                continue
+            raise RuntimeError(f"request failed after {retries} attempts: {url}\n{error}") from error
+
+    raise RuntimeError(f"request failed: {url}\n{last_error}")
+
+
+def request_text(url: str, headers: dict[str, str] | None = None) -> str:
+    body, _ = request_bytes(url, headers=headers)
+    return body.decode("utf-8")
+
+
+def request_json(url: str) -> tuple[Any, dict[str, str]]:
+    body, headers = request_bytes(url, headers=github_headers())
+    return json.loads(body.decode("utf-8")), headers
 
 
 def build_url(path: str, params: dict[str, Any] | None = None) -> str:
@@ -150,29 +112,122 @@ def paged_items(path: str, params: dict[str, Any] | None, key: str | None = None
     return out
 
 
-def normalize_language_name(language: str) -> str:
-    return LANGUAGE_ALIASES.get(language, language)
+def yaml_scalar(value: str) -> str:
+    value = value.strip()
+    if value.startswith('"') and value.endswith('"'):
+        return value[1:-1]
+    if value.startswith("'") and value.endswith("'"):
+        return value[1:-1]
+    return value
 
-def language_color(language: str) -> str:
-    normalized = normalize_language_name(language)
-    return LANG_COLORS.get(normalized, LANG_COLORS["Other"])
+
+def parse_linguist_languages(text: str) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    languages: dict[str, dict[str, Any]] = {}
+    current: str | None = None
+    section: str | None = None
+
+    for raw_line in text.splitlines():
+        if not raw_line.strip() or raw_line.startswith("#") or raw_line == "---":
+            continue
+
+        language_match = re.match(r"^([^ \t][^:\n]*):\s*$", raw_line)
+        if language_match:
+            current = language_match.group(1)
+            languages[current] = {
+                "extensions": [],
+                "filenames": [],
+                "color": None,
+                "group": None,
+            }
+            section = None
+            continue
+
+        if current is None:
+            continue
+
+        stripped = raw_line.strip()
+
+        if stripped == "extensions:":
+            section = "extensions"
+            continue
+
+        if stripped == "filenames:":
+            section = "filenames"
+            continue
+
+        if re.match(r"^[A-Za-z_][A-Za-z0-9_ -]*:", stripped):
+            section = None
+
+            if stripped.startswith("color:"):
+                languages[current]["color"] = yaml_scalar(stripped.split(":", 1)[1])
+
+            if stripped.startswith("group:"):
+                languages[current]["group"] = yaml_scalar(stripped.split(":", 1)[1])
+
+            continue
+
+        if section in {"extensions", "filenames"} and stripped.startswith("- "):
+            languages[current][section].append(yaml_scalar(stripped[2:]))
+
+    colors: dict[str, str] = {}
+    for language, meta in languages.items():
+        color = meta.get("color")
+        if color:
+            colors[language] = color
+
+    for language, meta in languages.items():
+        if language in colors:
+            continue
+        group = meta.get("group")
+        if group and group in colors:
+            colors[language] = colors[group]
+
+    extension_language: dict[str, str] = {}
+    filename_language: dict[str, str] = {}
+
+    for language, meta in languages.items():
+        for extension in meta["extensions"]:
+            extension_language.setdefault(extension, language)
+
+        for filename in meta["filenames"]:
+            filename_language.setdefault(filename, language)
+
+    return extension_language, filename_language, colors
+
+
+_LINGUIST_DATA: tuple[dict[str, str], dict[str, str], dict[str, str]] | None = None
+
+
+def linguist_data() -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    global _LINGUIST_DATA
+
+    if _LINGUIST_DATA is None:
+        text = request_text(LINGUIST_LANGUAGES_URL)
+        _LINGUIST_DATA = parse_linguist_languages(text)
+
+    return _LINGUIST_DATA
+
 
 def language_from_filename(filename: str) -> str:
+    extension_language, filename_language, _ = linguist_data()
+
     base = Path(filename).name
-    if base in SPECIAL_FILENAMES:
-        return normalize_language_name(SPECIAL_FILENAMES[base])
+    if base in filename_language:
+        return filename_language[base]
 
-    suffix = Path(filename).suffix
-    if suffix in EXTENSION_LANGUAGE:
-        return normalize_language_name(EXTENSION_LANGUAGE[suffix])
-
-    if filename.endswith(".cu.in") or filename.endswith(".cuh.in"):
-        return normalize_language_name("Cuda")
-
-    if filename.endswith(".cpp.in") or filename.endswith(".hpp.in"):
-        return normalize_language_name("C++")
+    for extension in sorted(extension_language, key=len, reverse=True):
+        if filename.endswith(extension):
+            return extension_language[extension]
 
     return "Other"
+
+
+def language_color(language: str) -> str:
+    if language == "Other":
+        return OTHER_COLOR
+
+    _, _, colors = linguist_data()
+    return colors.get(language, OTHER_COLOR)
 
 
 def parse_pr_ref(item: dict[str, Any]) -> tuple[str, str, int] | None:
@@ -231,12 +286,23 @@ def external_contribution_languages() -> Counter[str]:
             changes = int(changed_file.get("changes") or 0)
             if changes <= 0:
                 changes = int(changed_file.get("additions") or 0) + int(changed_file.get("deletions") or 0)
+
             if changes <= 0:
-                changes = 1
+                continue
 
             stats[language] += changes
 
     return stats
+
+
+def count_text_lines(body: bytes) -> int | None:
+    if not body:
+        return 0
+
+    if b"\0" in body[:4096]:
+        return None
+
+    return body.count(b"\n") + (0 if body.endswith(b"\n") else 1)
 
 
 def own_repository_languages() -> Counter[str]:
@@ -268,28 +334,51 @@ def own_repository_languages() -> Counter[str]:
         if repo.get("archived"):
             continue
 
-        languages_url = repo.get("languages_url")
-        if not languages_url:
+        default_branch = repo.get("default_branch")
+        if not default_branch:
             continue
 
-        languages, _ = request_json(languages_url)
+        tree_ref = urllib.parse.quote(default_branch, safe="")
+        tree, _ = request_json(f"{API}/repos/{USER}/{name}/git/trees/{tree_ref}?recursive=1")
 
-        for language, byte_count in languages.items():
-            stats[normalize_language_name(str(language))] += int(byte_count)
+        for item in tree.get("tree", []):
+            if item.get("type") != "blob":
+                continue
+
+            file_path = str(item.get("path", ""))
+            language = language_from_filename(file_path)
+
+            branch_url = urllib.parse.quote(default_branch, safe="")
+            path_url = urllib.parse.quote(file_path, safe="/")
+            raw_url = f"https://raw.githubusercontent.com/{USER}/{name}/{branch_url}/{path_url}"
+
+            body, _ = request_bytes(raw_url)
+            line_count = count_text_lines(body)
+
+            if line_count is None or line_count <= 0:
+                continue
+
+            stats[language] += line_count
 
     return stats
 
 
-
 def get_profile_title_style(dark: bool) -> str:
-    svg_path = Path("profile-summary-card-output/github_dark/0-profile-details.svg" if dark else "profile-summary-card-output/github/0-profile-details.svg")
+    svg_path = Path(
+        "profile-summary-card-output/github_dark/0-profile-details.svg"
+        if dark
+        else "profile-summary-card-output/github/0-profile-details.svg"
+    )
     root = ET.fromstring(svg_path.read_text(encoding="utf-8"))
+
     for elem in root.iter():
         if elem.tag.endswith("text") and (elem.text or "").strip() == USER:
             style = elem.attrib.get("style", "").strip()
             if style:
                 return style
+
     raise RuntimeError(f"Could not find title style for {USER} in {svg_path}")
+
 
 def xml_escape(text: str) -> str:
     return (
@@ -302,7 +391,6 @@ def xml_escape(text: str) -> str:
 
 def top_items(stats: Counter[str], limit: int = 6) -> list[tuple[str, int]]:
     positive_items = [(language, value) for language, value in stats.most_common() if value > 0]
-
     other_slot = limit - 1
 
     if len(positive_items) <= other_slot:
@@ -315,6 +403,7 @@ def top_items(stats: Counter[str], limit: int = 6) -> list[tuple[str, int]]:
         head.append(("Other", other_total))
 
     return head
+
 
 def donut_arc_path(cx: float, cy: float, r_outer: float, r_inner: float, start: float, end: float) -> str:
     if end - start >= math.tau:
@@ -330,6 +419,7 @@ def donut_arc_path(cx: float, cy: float, r_outer: float, r_inner: float, start: 
     x3 = cx + r_inner * math.cos(end)
     y3 = cy + r_inner * math.sin(end)
     x4 = cx + r_inner * math.cos(start)
+
     y4 = cy + r_inner * math.sin(start)
 
     return (
@@ -349,16 +439,12 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     border = "#30363d" if dark else "#d0d7de"
     text = "#c9d1d9" if dark else "#24292f"
 
-    # Match the old summary-card structure:
-    # title on top, legend on the left, donut chart on the right.
     lines: list[str] = []
     lines.append('<svg xmlns="http://www.w3.org/2000/svg" width="340" height="200" viewBox="0 0 340 200">')
     lines.append('<style>* { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, serif; }</style>')
     lines.append(f'<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="{border}" stroke-width="1" fill="{bg}" stroke-opacity="1"/>')
+
     title_style = get_profile_title_style(dark)
-    # The profile card is rendered as 700px viewBox at 80% README width.
-    # Language cards are rendered as 340px viewBox at 40.5% README width.
-    # Match the final on-page title size, not only the raw SVG font-size.
     title_style = title_style.replace("font-size: 22px", "font-size: 18px")
     lines.append(f'<text x="30" y="40" style="{title_style}">{xml_escape(title)}</text>')
 
@@ -375,6 +461,7 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     for i, (language, _) in enumerate(items):
         y = legend_y + i * row_gap
         color = language_color(language)
+
         lines.append(f'<rect x="{legend_x}" y="{y - 10}" width="14" height="14" rx="2" fill="{color}" stroke="{border}" style="stroke-width: 1px;"/>')
         lines.append(f'<text x="{legend_x + 22}" y="{y + 2}" style="fill: {text}; font-size: 14px;">{xml_escape(language)}</text>')
 
@@ -388,11 +475,13 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
         color = language_color(language)
         next_angle = angle + math.tau * (value / total)
         path_data = donut_arc_path(cx, cy, r_outer, r_inner, angle, next_angle)
+
         lines.append(f'<path d="{path_data}" style="fill: {color}; stroke-width: 2px;" stroke="{border}"/>')
         angle = next_angle
 
     lines.append("</svg>")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
 
 def main() -> None:
     external = external_contribution_languages()
