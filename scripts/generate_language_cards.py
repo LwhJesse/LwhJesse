@@ -321,6 +321,36 @@ def count_text_lines(body: bytes) -> int | None:
     return body.count(b"\n") + (0 if body.endswith(b"\n") else 1)
 
 
+OWN_REPO_EXCLUDED_DIR_PREFIXES = (
+    ".github/",
+    "docs/",
+    "doc/",
+)
+
+OWN_REPO_EXCLUDED_BASENAME_PREFIXES = (
+    "readme",
+    "changelog",
+    "license",
+    "copying",
+    "contributing",
+    "code_of_conduct",
+    "security",
+    "notice",
+    "authors",
+)
+
+
+def should_skip_own_repo_file(file_path: str) -> bool:
+    normalized = file_path.replace("\\", "/").lower()
+
+    if normalized.startswith(OWN_REPO_EXCLUDED_DIR_PREFIXES):
+        return True
+
+    base = Path(normalized).name
+
+    return base.startswith(OWN_REPO_EXCLUDED_BASENAME_PREFIXES)
+
+
 def own_repository_languages() -> Counter[str]:
     stats: Counter[str] = Counter()
 
@@ -362,6 +392,10 @@ def own_repository_languages() -> Counter[str]:
                 continue
 
             file_path = str(item.get("path", ""))
+
+            if should_skip_own_repo_file(file_path):
+                continue
+
             language = language_from_filename(file_path)
 
             branch_url = urllib.parse.quote(default_branch, safe="")
