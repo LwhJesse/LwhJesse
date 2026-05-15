@@ -27,24 +27,21 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 LANG_COLORS = {
     "C++": "#f34b7d",
     "C": "#555555",
-    "C/C++": "#f34b7d",
-    "CUDA": "#76b900",
+    "Cuda": "#3A4E3A",
     "Python": "#3572A5",
-    "GLSL": "#5686a5",
     "Markdown": "#083fa1",
-    "reStructuredText": "#141414",
-    "YAML": "#cb171e",
-    "JSON": "#292929",
-    "Shell": "#89e051",
-    "Lua": "#000080",
-    "CMake": "#DA3434",
-    "TOML": "#9c4221",
+    "GLSL": "#5686a5",
     "JavaScript": "#f1e05a",
-    "TypeScript": "#3178c6",
-    "HTML": "#e34c26",
-    "CSS": "#563d7c",
-    "Dart": "#00B4AB",
+    "Shell": "#89e051",
+    "CMake": "#DA3434",
+    "reStructuredText": "#141414",
     "Other": "#6e7681",
+}
+
+LANGUAGE_ALIASES = {
+    "CUDA": "Cuda",
+    "Cuda": "Cuda",
+    "C/C++": "C",
 }
 
 EXTENSION_LANGUAGE = {
@@ -153,20 +150,27 @@ def paged_items(path: str, params: dict[str, Any] | None, key: str | None = None
     return out
 
 
+def normalize_language_name(language: str) -> str:
+    return LANGUAGE_ALIASES.get(language, language)
+
+def language_color(language: str) -> str:
+    normalized = normalize_language_name(language)
+    return LANG_COLORS.get(normalized, LANG_COLORS["Other"])
+
 def language_from_filename(filename: str) -> str:
     base = Path(filename).name
     if base in SPECIAL_FILENAMES:
-        return SPECIAL_FILENAMES[base]
+        return normalize_language_name(SPECIAL_FILENAMES[base])
 
     suffix = Path(filename).suffix
     if suffix in EXTENSION_LANGUAGE:
-        return EXTENSION_LANGUAGE[suffix]
+        return normalize_language_name(EXTENSION_LANGUAGE[suffix])
 
     if filename.endswith(".cu.in") or filename.endswith(".cuh.in"):
-        return "CUDA"
+        return normalize_language_name("Cuda")
 
     if filename.endswith(".cpp.in") or filename.endswith(".hpp.in"):
-        return "C++"
+        return normalize_language_name("C++")
 
     return "Other"
 
@@ -271,7 +275,7 @@ def own_repository_languages() -> Counter[str]:
         languages, _ = request_json(languages_url)
 
         for language, byte_count in languages.items():
-            stats[str(language)] += int(byte_count)
+            stats[normalize_language_name(str(language))] += int(byte_count)
 
     return stats
 
@@ -370,7 +374,7 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
 
     for i, (language, _) in enumerate(items):
         y = legend_y + i * row_gap
-        color = LANG_COLORS.get(language, LANG_COLORS["Other"])
+        color = language_color(language)
         lines.append(f'<rect x="{legend_x}" y="{y - 10}" width="14" height="14" rx="2" fill="{color}" stroke="{border}" style="stroke-width: 1px;"/>')
         lines.append(f'<text x="{legend_x + 22}" y="{y + 2}" style="fill: {text}; font-size: 14px;">{xml_escape(language)}</text>')
 
@@ -381,7 +385,7 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     angle = -math.pi / 2
 
     for language, value in items:
-        color = LANG_COLORS.get(language, LANG_COLORS["Other"])
+        color = language_color(language)
         next_angle = angle + math.tau * (value / total)
         path_data = donut_arc_path(cx, cy, r_outer, r_inner, angle, next_angle)
         lines.append(f'<path d="{path_data}" style="fill: {color}; stroke-width: 2px;" stroke="{border}"/>')
