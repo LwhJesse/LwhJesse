@@ -12,12 +12,12 @@
 <text x="62" y="138" style="fill: #24292f; font-size: 14px;">GLSL</text>
 <rect x="40" y="148" width="14" height="14" rx="2" fill="#555555" stroke="#d0d7de" style="stroke-width: 1px;"/>
 <text x="62" y="160" style="fill: #24292f; font-size: 14px;">C</text>
-<rect x="40" y="170" width="14" height="14" rx="2" fill="#141414" stroke="#d0d7de" style="stroke-width: 1px;"/>
-<text x="62" y="182" style="fill: #24292f; font-size: 14px;">reStructuredText</text>
+<rect x="40" y="170" width="14" height="14" rx="2" fill="#6e7681" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="182" style="fill: #24292f; font-size: 14px;">Other</text>
 <path d="M238.000,54.000 A58.000,58.000,0,0,1,246.984,169.300 L243.267,145.590 A34.000,34.000,0,0,0,238.000,78.000 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M246.984,169.300 A58.000,58.000,0,0,1,200.229,67.984 L215.859,86.198 A34.000,34.000,0,0,0,243.267,145.590 Z" style="fill: #76b900; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M200.229,67.984 A58.000,58.000,0,0,1,217.524,57.735 L225.997,80.189 A34.000,34.000,0,0,0,215.859,86.198 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M217.524,57.735 A58.000,58.000,0,0,1,227.948,54.878 L232.108,78.514 A34.000,34.000,0,0,0,225.997,80.189 Z" style="fill: #5686a5; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M227.948,54.878 A58.000,58.000,0,0,1,237.278,54.004 L237.577,78.003 A34.000,34.000,0,0,0,232.108,78.514 Z" style="fill: #555555; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M237.278,54.004 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,237.577,78.003 Z" style="fill: #141414; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M237.278,54.004 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,237.577,78.003 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#d0d7de"/>
 </svg>

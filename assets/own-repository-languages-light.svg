@@ -12,12 +12,12 @@
 <text x="62" y="138" style="fill: #24292f; font-size: 14px;">JavaScript</text>
 <rect x="40" y="148" width="14" height="14" rx="2" fill="#89e051" stroke="#d0d7de" style="stroke-width: 1px;"/>
 <text x="62" y="160" style="fill: #24292f; font-size: 14px;">Shell</text>
-<rect x="40" y="170" width="14" height="14" rx="2" fill="#DA3434" stroke="#d0d7de" style="stroke-width: 1px;"/>
-<text x="62" y="182" style="fill: #24292f; font-size: 14px;">CMake</text>
+<rect x="40" y="170" width="14" height="14" rx="2" fill="#6e7681" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="182" style="fill: #24292f; font-size: 14px;">Other</text>
 <path d="M238.000,54.000 A58.000,58.000,0,1,1,205.135,159.790 L218.734,140.015 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #3572A5; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M205.135,159.790 A58.000,58.000,0,0,1,182.422,95.415 L205.420,102.278 A34.000,34.000,0,0,0,218.734,140.015 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M182.422,95.415 A58.000,58.000,0,0,1,198.992,69.077 L215.133,86.838 A34.000,34.000,0,0,0,205.420,102.278 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M198.992,69.077 A58.000,58.000,0,0,1,224.340,55.632 L229.992,78.956 A34.000,34.000,0,0,0,215.133,86.838 Z" style="fill: #f1e05a; stroke-width: 2px;" stroke="#d0d7de"/>
 <path d="M224.340,55.632 A58.000,58.000,0,0,1,236.528,54.019 L237.137,78.011 A34.000,34.000,0,0,0,229.992,78.956 Z" style="fill: #89e051; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M236.528,54.019 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,237.137,78.011 Z" style="fill: #DA3434; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M236.528,54.019 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,237.137,78.011 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#d0d7de"/>
 </svg>
