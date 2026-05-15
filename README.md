@@ -51,9 +51,11 @@ My recent work focuses on CUDA performance engineering, sparse matrix operations
 
 <div align="center">
 
-`C++` · `CUDA` · `Python` · `Shell` · `Lua` · `Git` · `Linux` · `Arch Linux` · `Neovim`
+`C++` · `CUDA` · `Python` · `Linux` · `Arch Linux`
 
-`SU2` · `amgcl` · `ArrayFire` · `CUTLASS` · `OpenFOAM` · `OpenSees` · `Hyprland` · `FEM` · `CFD` · `Numerical Linear Algebra`
+`cuSPARSE` · `cuBLAS` · `SpMV` · `Batched GEMM` · `Krylov Solvers` · `Sparse Linear Algebra`
+
+`SU2` · `amgcl` · `ArrayFire` · `CUTLASS` · `OpenSees`
 
 </div>
 
