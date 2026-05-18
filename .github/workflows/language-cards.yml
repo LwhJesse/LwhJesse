@@ -31,6 +31,7 @@ jobs:
           git add assets/external-contribution-languages-*.svg assets/own-repository-languages-*.svg
           if ! git diff --cached --quiet; then
             git commit -m "Generate language cards"
+            git pull --rebase origin main
             git push
           else
             echo "language cards are already up to date"
