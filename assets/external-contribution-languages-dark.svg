@@ -8,16 +8,16 @@
 <text x="62" y="94" style="fill: #c9d1d9; font-size: 14px;">C++</text>
 <rect x="40" y="104" width="14" height="14" rx="2" fill="#083fa1" stroke="#30363d" style="stroke-width: 1px;"/>
 <text x="62" y="116" style="fill: #c9d1d9; font-size: 14px;">Markdown</text>
-<rect x="40" y="126" width="14" height="14" rx="2" fill="#5686a5" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="138" style="fill: #c9d1d9; font-size: 14px;">GLSL</text>
-<rect x="40" y="148" width="14" height="14" rx="2" fill="#555555" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="160" style="fill: #c9d1d9; font-size: 14px;">C</text>
+<rect x="40" y="126" width="14" height="14" rx="2" fill="#3178c6" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="138" style="fill: #c9d1d9; font-size: 14px;">TypeScript</text>
+<rect x="40" y="148" width="14" height="14" rx="2" fill="#5686a5" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="160" style="fill: #c9d1d9; font-size: 14px;">GLSL</text>
 <rect x="40" y="170" width="14" height="14" rx="2" fill="#6e7681" stroke="#30363d" style="stroke-width: 1px;"/>
 <text x="62" y="182" style="fill: #c9d1d9; font-size: 14px;">Other</text>
-<path d="M238.000,54.000 A58.000,58.000,0,1,1,228.335,169.189 L232.334,145.525 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M228.335,169.189 A58.000,58.000,0,0,1,204.746,64.480 L218.506,84.143 A34.000,34.000,0,0,0,232.334,145.525 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M204.746,64.480 A58.000,58.000,0,0,1,218.940,57.221 L226.827,79.888 A34.000,34.000,0,0,0,218.506,84.143 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M218.940,57.221 A58.000,58.000,0,0,1,227.210,55.012 L231.675,78.593 A34.000,34.000,0,0,0,226.827,79.888 Z" style="fill: #5686a5; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M227.210,55.012 A58.000,58.000,0,0,1,234.575,54.101 L235.992,78.059 A34.000,34.000,0,0,0,231.675,78.593 Z" style="fill: #555555; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M234.575,54.101 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,235.992,78.059 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M238.000,54.000 A58.000,58.000,0,1,1,233.843,169.851 L235.563,145.913 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M233.843,169.851 A58.000,58.000,0,0,1,197.431,70.549 L214.218,87.701 A34.000,34.000,0,0,0,235.563,145.913 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M197.431,70.549 A58.000,58.000,0,0,1,209.845,61.292 L221.495,82.275 A34.000,34.000,0,0,0,214.218,87.701 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M209.845,61.292 A58.000,58.000,0,0,1,219.471,57.039 L227.138,79.782 A34.000,34.000,0,0,0,221.495,82.275 Z" style="fill: #3178c6; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M219.471,57.039 A58.000,58.000,0,0,1,227.519,54.955 L231.856,78.560 A34.000,34.000,0,0,0,227.138,79.782 Z" style="fill: #5686a5; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M227.519,54.955 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,231.856,78.560 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#30363d"/>
 </svg>
