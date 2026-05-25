@@ -506,8 +506,8 @@ def write_svg(path: Path, title: str, stats: Counter[str], dark: bool) -> None:
     lines.append('<style>* { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, serif; }</style>')
     lines.append(f'<rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="{border}" stroke-width="1" fill="{bg}" stroke-opacity="1"/>')
 
-    title_style = get_profile_title_style(dark)
-    title_style = title_style.replace("font-size: 22px", "font-size: 18px")
+    title_fill = "#2f81f7" if dark else "#0969da"
+    title_style = f"font-size: 18px; font-weight: 600; fill: {title_fill};"
     lines.append(f'<text x="30" y="40" style="{title_style}">{xml_escape(title)}</text>')
 
     if not items or total <= 0:
