@@ -2,10 +2,10 @@
 <style>* { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, serif; }</style>
 <rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="#d0d7de" stroke-width="1" fill="#ffffff" stroke-opacity="1"/>
 <text x="30" y="40" style="font-size: 18px; font-weight: 600; fill: #0969da;">External PR Languages</text>
-<rect x="40" y="60" width="14" height="14" rx="2" fill="#3A4E3A" stroke="#d0d7de" style="stroke-width: 1px;"/>
-<text x="62" y="72" style="fill: #24292f; font-size: 14px;">Cuda</text>
-<rect x="40" y="82" width="14" height="14" rx="2" fill="#f34b7d" stroke="#d0d7de" style="stroke-width: 1px;"/>
-<text x="62" y="94" style="fill: #24292f; font-size: 14px;">C++</text>
+<rect x="40" y="60" width="14" height="14" rx="2" fill="#f34b7d" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="72" style="fill: #24292f; font-size: 14px;">C++</text>
+<rect x="40" y="82" width="14" height="14" rx="2" fill="#3A4E3A" stroke="#d0d7de" style="stroke-width: 1px;"/>
+<text x="62" y="94" style="fill: #24292f; font-size: 14px;">Cuda</text>
 <rect x="40" y="104" width="14" height="14" rx="2" fill="#083fa1" stroke="#d0d7de" style="stroke-width: 1px;"/>
 <text x="62" y="116" style="fill: #24292f; font-size: 14px;">Markdown</text>
 <rect x="40" y="126" width="14" height="14" rx="2" fill="#3178c6" stroke="#d0d7de" style="stroke-width: 1px;"/>
@@ -14,10 +14,10 @@
 <text x="62" y="160" style="fill: #24292f; font-size: 14px;">GLSL</text>
 <rect x="40" y="170" width="14" height="14" rx="2" fill="#6e7681" stroke="#d0d7de" style="stroke-width: 1px;"/>
 <text x="62" y="182" style="fill: #24292f; font-size: 14px;">Other</text>
-<path d="M238.000,54.000 A58.000,58.000,0,1,1,233.843,169.851 L235.563,145.913 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M233.843,169.851 A58.000,58.000,0,0,1,197.431,70.549 L214.218,87.701 A34.000,34.000,0,0,0,235.563,145.913 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M197.431,70.549 A58.000,58.000,0,0,1,209.845,61.292 L221.495,82.275 A34.000,34.000,0,0,0,214.218,87.701 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M209.845,61.292 A58.000,58.000,0,0,1,219.471,57.039 L227.138,79.782 A34.000,34.000,0,0,0,221.495,82.275 Z" style="fill: #3178c6; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M219.471,57.039 A58.000,58.000,0,0,1,227.519,54.955 L231.856,78.560 A34.000,34.000,0,0,0,227.138,79.782 Z" style="fill: #5686a5; stroke-width: 2px;" stroke="#d0d7de"/>
-<path d="M227.519,54.955 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,231.856,78.560 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M238.000,54.000 A58.000,58.000,0,1,1,205.119,159.779 L218.725,140.009 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M205.119,159.779 A58.000,58.000,0,0,1,210.542,60.911 L221.904,82.051 A34.000,34.000,0,0,0,218.725,140.009 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M210.542,60.911 A58.000,58.000,0,0,1,219.607,56.993 L227.218,79.755 A34.000,34.000,0,0,0,221.904,82.051 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M219.607,56.993 A58.000,58.000,0,0,1,226.079,55.238 L231.012,78.726 A34.000,34.000,0,0,0,227.218,79.755 Z" style="fill: #3178c6; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M226.079,55.238 A58.000,58.000,0,0,1,231.306,54.388 L234.076,78.227 A34.000,34.000,0,0,0,231.012,78.726 Z" style="fill: #5686a5; stroke-width: 2px;" stroke="#d0d7de"/>
+<path d="M231.306,54.388 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,234.076,78.227 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#d0d7de"/>
 </svg>
