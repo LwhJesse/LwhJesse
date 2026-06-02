@@ -2,22 +2,22 @@
 <style>* { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, serif; }</style>
 <rect x="1" y="1" rx="5" ry="5" height="198" width="338" stroke="#30363d" stroke-width="1" fill="#0d1117" stroke-opacity="1"/>
 <text x="30" y="40" style="font-size: 18px; font-weight: 600; fill: #2f81f7;">External PR Languages</text>
-<rect x="40" y="60" width="14" height="14" rx="2" fill="#f34b7d" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="72" style="fill: #c9d1d9; font-size: 14px;">C++</text>
-<rect x="40" y="82" width="14" height="14" rx="2" fill="#3A4E3A" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="94" style="fill: #c9d1d9; font-size: 14px;">Cuda</text>
-<rect x="40" y="104" width="14" height="14" rx="2" fill="#083fa1" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="116" style="fill: #c9d1d9; font-size: 14px;">Markdown</text>
-<rect x="40" y="126" width="14" height="14" rx="2" fill="#3178c6" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="138" style="fill: #c9d1d9; font-size: 14px;">TypeScript</text>
-<rect x="40" y="148" width="14" height="14" rx="2" fill="#5686a5" stroke="#30363d" style="stroke-width: 1px;"/>
-<text x="62" y="160" style="fill: #c9d1d9; font-size: 14px;">GLSL</text>
+<rect x="40" y="60" width="14" height="14" rx="2" fill="#3A4E3A" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="72" style="fill: #c9d1d9; font-size: 14px;">Cuda</text>
+<rect x="40" y="82" width="14" height="14" rx="2" fill="#f34b7d" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="94" style="fill: #c9d1d9; font-size: 14px;">C++</text>
+<rect x="40" y="104" width="14" height="14" rx="2" fill="#007800" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="116" style="fill: #c9d1d9; font-size: 14px;">Meson</text>
+<rect x="40" y="126" width="14" height="14" rx="2" fill="#083fa1" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="138" style="fill: #c9d1d9; font-size: 14px;">Markdown</text>
+<rect x="40" y="148" width="14" height="14" rx="2" fill="#3178c6" stroke="#30363d" style="stroke-width: 1px;"/>
+<text x="62" y="160" style="fill: #c9d1d9; font-size: 14px;">TypeScript</text>
 <rect x="40" y="170" width="14" height="14" rx="2" fill="#6e7681" stroke="#30363d" style="stroke-width: 1px;"/>
 <text x="62" y="182" style="fill: #c9d1d9; font-size: 14px;">Other</text>
-<path d="M238.000,54.000 A58.000,58.000,0,1,1,205.119,159.779 L218.725,140.009 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M205.119,159.779 A58.000,58.000,0,0,1,210.542,60.911 L221.904,82.051 A34.000,34.000,0,0,0,218.725,140.009 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M210.542,60.911 A58.000,58.000,0,0,1,219.607,56.993 L227.218,79.755 A34.000,34.000,0,0,0,221.904,82.051 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M219.607,56.993 A58.000,58.000,0,0,1,226.079,55.238 L231.012,78.726 A34.000,34.000,0,0,0,227.218,79.755 Z" style="fill: #3178c6; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M226.079,55.238 A58.000,58.000,0,0,1,231.306,54.388 L234.076,78.227 A34.000,34.000,0,0,0,231.012,78.726 Z" style="fill: #5686a5; stroke-width: 2px;" stroke="#30363d"/>
-<path d="M231.306,54.388 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,234.076,78.227 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M238.000,54.000 A58.000,58.000,0,1,1,229.235,169.334 L232.862,145.609 A34.000,34.000,0,1,0,238.000,78.000 Z" style="fill: #3A4E3A; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M229.235,169.334 A58.000,58.000,0,0,1,214.928,58.786 L224.475,80.806 A34.000,34.000,0,0,0,232.862,145.609 Z" style="fill: #f34b7d; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M214.928,58.786 A58.000,58.000,0,0,1,223.140,55.936 L229.289,79.135 A34.000,34.000,0,0,0,224.475,80.806 Z" style="fill: #007800; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M223.140,55.936 A58.000,58.000,0,0,1,228.551,54.775 L232.461,78.454 A34.000,34.000,0,0,0,229.289,79.135 Z" style="fill: #083fa1; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M228.551,54.775 A58.000,58.000,0,0,1,232.275,54.283 L234.644,78.166 A34.000,34.000,0,0,0,232.461,78.454 Z" style="fill: #3178c6; stroke-width: 2px;" stroke="#30363d"/>
+<path d="M232.275,54.283 A58.000,58.000,0,0,1,238.000,54.000 L238.000,78.000 A34.000,34.000,0,0,0,234.644,78.166 Z" style="fill: #6e7681; stroke-width: 2px;" stroke="#30363d"/>
 </svg>
