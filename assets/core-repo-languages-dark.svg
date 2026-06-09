@@ -19,7 +19,7 @@ text { font-family: "Garamond Libre Profile Cards", "Garamond Libre", Georgia, s
 
   <rect x="24" y="70" width="292" height="10" rx="5" ry="5" fill="#21262d" />
   <g clip-path="url(#barclip-dark)">
-    <rect x="24.000" y="70" width="171.978" height="10" fill="#3572A5" /><rect x="195.978" y="70" width="74.058" height="10" fill="#f34b7d" /><rect x="270.036" y="70" width="22.870" height="10" fill="#76B900" /><rect x="292.906" y="70" width="12.647" height="10" fill="#f1e05a" /><rect x="305.553" y="70" width="6.672" height="10" fill="#89e051" /><rect x="312.225" y="70" width="3.775" height="10" fill="#8b949e" />
+    <rect x="24.000" y="70" width="171.954" height="10" fill="#3572A5" /><rect x="195.954" y="70" width="74.047" height="10" fill="#f34b7d" /><rect x="270.001" y="70" width="22.867" height="10" fill="#76B900" /><rect x="292.868" y="70" width="12.686" height="10" fill="#f1e05a" /><rect x="305.554" y="70" width="6.672" height="10" fill="#89e051" /><rect x="312.226" y="70" width="3.774" height="10" fill="#8b949e" />
   </g>
 
   
