@@ -41,6 +41,14 @@ OUT_DIR = Path("assets")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
+class RequestFailure(RuntimeError):
+    def __init__(self, url: str, error: Exception, status: int | None = None) -> None:
+        self.url = url
+        self.error = error
+        self.status = status
+        super().__init__(f"request failed: {url}\n{error}")
+
+
 def github_headers() -> dict[str, str]:
     headers = {
         "Accept": "application/vnd.github+json",
@@ -61,14 +69,21 @@ def request_bytes(url: str, headers: dict[str, str] | None = None, retries: int 
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
                 return resp.read(), dict(resp.headers)
+        except urllib.error.HTTPError as error:
+            last_error = error
+            transient = error.code == 429 or error.code >= 500
+            if transient and attempt < retries:
+                time.sleep(1.5 * attempt)
+                continue
+            raise RequestFailure(url, error, status=error.code) from error
         except (urllib.error.URLError, TimeoutError, ssl.SSLError, ConnectionResetError) as error:
             last_error = error
             if attempt < retries:
                 time.sleep(1.5 * attempt)
                 continue
-            raise RuntimeError(f"request failed after {retries} attempts: {url}\n{error}") from error
+            raise RequestFailure(url, error) from error
 
-    raise RuntimeError(f"request failed: {url}\n{last_error}")
+    raise RequestFailure(url, last_error or RuntimeError("unknown request error"))
 
 
 def request_text(url: str, headers: dict[str, str] | None = None) -> str:
@@ -311,46 +326,6 @@ def external_contribution_languages() -> Counter[str]:
     return stats
 
 
-def count_text_lines(body: bytes) -> int | None:
-    if not body:
-        return 0
-
-    if b"\0" in body[:4096]:
-        return None
-
-    return body.count(b"\n") + (0 if body.endswith(b"\n") else 1)
-
-
-OWN_REPO_EXCLUDED_DIR_PREFIXES = (
-    ".github/",
-    "docs/",
-    "doc/",
-)
-
-OWN_REPO_EXCLUDED_BASENAME_PREFIXES = (
-    "readme",
-    "changelog",
-    "license",
-    "copying",
-    "contributing",
-    "code_of_conduct",
-    "security",
-    "notice",
-    "authors",
-)
-
-
-def should_skip_own_repo_file(file_path: str) -> bool:
-    normalized = file_path.replace("\\", "/").lower()
-
-    if normalized.startswith(OWN_REPO_EXCLUDED_DIR_PREFIXES):
-        return True
-
-    base = Path(normalized).name
-
-    return base.startswith(OWN_REPO_EXCLUDED_BASENAME_PREFIXES)
-
-
 def own_repository_languages() -> Counter[str]:
     stats: Counter[str] = Counter()
 
@@ -384,37 +359,26 @@ def own_repository_languages() -> Counter[str]:
         if not default_branch:
             continue
 
-        tree_ref = urllib.parse.quote(default_branch, safe="")
-        tree, _ = request_json(f"{API}/repos/{USER}/{name}/git/trees/{tree_ref}?recursive=1")
-
-        for item in tree.get("tree", []):
-            if item.get("type") != "blob":
+        try:
+            languages, _ = request_json(str(repo.get("languages_url") or f"{API}/repos/{USER}/{name}/languages"))
+        except RequestFailure as error:
+            if error.status in {404, 409}:
+                print(f"skipping {USER}/{name}: cannot read repository languages ({error.status})")
                 continue
+            raise
 
-            file_path = str(item.get("path", ""))
+        if not isinstance(languages, dict):
+            continue
 
-            if should_skip_own_repo_file(file_path):
-                continue
-
-            language = language_from_filename(file_path)
-
-            # Own Repo Languages is source-focused. Markdown documentation is
-            # intentionally excluded here. External PR Languages still counts
-            # Markdown PR changes normally.
+        for language, value in languages.items():
             if language == "Markdown":
                 continue
 
-            branch_url = urllib.parse.quote(default_branch, safe="")
-            path_url = urllib.parse.quote(file_path, safe="/")
-            raw_url = f"https://raw.githubusercontent.com/{USER}/{name}/{branch_url}/{path_url}"
-
-            body, _ = request_bytes(raw_url)
-            line_count = count_text_lines(body)
-
-            if line_count is None or line_count <= 0:
+            count = int(value or 0)
+            if count <= 0:
                 continue
 
-            stats[language] += line_count
+            stats[language] += count
 
     return stats
 

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import os
 import re
+import ssl
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -22,13 +25,32 @@ TITLE_COLORS = {
 }
 
 
-def fetch(url: str) -> bytes:
+def fetch(url: str, retries: int = 4) -> bytes:
     req = urllib.request.Request(
         url,
         headers={"User-Agent": "LwhJesse-profile-card-fetcher"},
     )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return r.read()
+
+    last_error: Exception | None = None
+    for attempt in range(1, retries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return r.read()
+        except urllib.error.HTTPError as error:
+            last_error = error
+            transient = error.code == 429 or error.code >= 500
+            if transient and attempt < retries:
+                time.sleep(1.5 * attempt)
+                continue
+            raise RuntimeError(f"request failed: {url}\n{error}") from error
+        except (urllib.error.URLError, TimeoutError, ssl.SSLError, ConnectionResetError) as error:
+            last_error = error
+            if attempt < retries:
+                time.sleep(1.5 * attempt)
+                continue
+            raise RuntimeError(f"request failed: {url}\n{error}") from error
+
+    raise RuntimeError(f"request failed: {url}\n{last_error}")
 
 
 def normalize_svg(svg: str, theme: str) -> str:
@@ -65,12 +87,22 @@ def main():
 
         for card, filename in CARDS:
             url = f"{BASE}/{card}?username={USER}&theme={theme}"
-            data = fetch(url)
+            path = outdir / filename
+
+            try:
+                data = fetch(url)
+            except RuntimeError as error:
+                if path.exists():
+                    print(f"warning: keeping existing {path}: {error}")
+                    continue
+                raise
 
             if b"<svg" not in data[:500]:
+                if path.exists():
+                    print(f"warning: keeping existing {path}: unexpected response for {url}")
+                    continue
                 raise RuntimeError(f"Unexpected response for {url}")
 
-            path = outdir / filename
             svg = normalize_svg(data.decode("utf-8"), theme)
             path.write_text(svg, encoding="utf-8")
             print(f"wrote {path}")
